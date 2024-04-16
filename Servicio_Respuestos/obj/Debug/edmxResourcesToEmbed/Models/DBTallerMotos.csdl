@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBTallerMotosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="categoria">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="repuestoes" Relationship="Self.FK__repuesto__codigo__02FC7413" FromRole="categoria" ToRole="repuesto" />
+  </EntityType>
+  <EntityType Name="ciudad">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="codigo_departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="departamento" Relationship="Self.FK__ciudad__codigo_d__0F624AF8" FromRole="ciudad" ToRole="departamento" />
+    <NavigationProperty Name="proveedors" Relationship="Self.FK__proveedor__codig__10566F31" FromRole="ciudad" ToRole="proveedor" />
+  </EntityType>
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="cedula_cliente" />
+    </Key>
+    <Property Name="cedula_cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="edad" Type="Int32" />
+    <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="id_moto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="moto" Relationship="Self.FK__cliente__id_moto__17F790F9" FromRole="cliente" ToRole="moto" />
+  </EntityType>
+  <EntityType Name="compatibilidad">
+    <Key>
+      <PropertyRef Name="id_compatibilidad" />
+    </Key>
+    <Property Name="id_compatibilidad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="codigo_repuesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_marca" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="cantidad_requerida" Type="Int32" />
+    <NavigationProperty Name="repuesto" Relationship="Self.FK__compatibi__codig__1F98B2C1" FromRole="compatibilidad" ToRole="repuesto" />
+    <NavigationProperty Name="marca" Relationship="Self.FK__compatibi__id_ma__208CD6FA" FromRole="compatibilidad" ToRole="marca" />
+  </EntityType>
+  <EntityType Name="departamento">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ciudads" Relationship="Self.FK__ciudad__codigo_d__0F624AF8" FromRole="departamento" ToRole="ciudad" />
+  </EntityType>
+  <EntityType Name="empleado">
+    <Key>
+      <PropertyRef Name="cedula" />
+    </Key>
+    <Property Name="cedula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="edad" Type="Int32" />
+    <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="codigo_tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tipo_empleado" Relationship="Self.FK__empleado__codigo__07C12930" FromRole="empleado" ToRole="tipo_empleado" />
+  </EntityType>
+  <EntityType Name="garantia">
+    <Key>
+      <PropertyRef Name="id_garantia" />
+    </Key>
+    <Property Name="id_garantia" Type="Int32" Nullable="false" />
+    <Property Name="id_venta" Type="Int32" />
+    <Property Name="duracion" Type="Int32" />
+    <NavigationProperty Name="venta" Relationship="Self.FK__garantia__id_ven__656C112C" FromRole="garantia" ToRole="venta" />
+  </EntityType>
+  <EntityType Name="marca">
+    <Key>
+      <PropertyRef Name="id_marca" />
+    </Key>
+    <Property Name="id_marca" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="compatibilidads" Relationship="Self.FK__compatibi__id_ma__208CD6FA" FromRole="marca" ToRole="compatibilidad" />
+  </EntityType>
+  <EntityType Name="moto">
+    <Key>
+      <PropertyRef Name="id_moto" />
+    </Key>
+    <Property Name="id_moto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Marca" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="modelo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Año" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="clientes" Relationship="Self.FK__cliente__id_moto__17F790F9" FromRole="moto" ToRole="cliente" />
+  </EntityType>
+  <EntityType Name="proveedor">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="codigo_ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ciudad" Relationship="Self.FK__proveedor__codig__10566F31" FromRole="proveedor" ToRole="ciudad" />
+  </EntityType>
+  <EntityType Name="repuesto">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="precio" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="codigo_categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="categoria" Relationship="Self.FK__repuesto__codigo__02FC7413" FromRole="repuesto" ToRole="categoria" />
+    <NavigationProperty Name="compatibilidads" Relationship="Self.FK__compatibi__codig__1F98B2C1" FromRole="repuesto" ToRole="compatibilidad" />
+    <NavigationProperty Name="ventas" Relationship="Self.FK__venta__codigo_re__628FA481" FromRole="repuesto" ToRole="venta" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tipo_empleado">
+    <Key>
+      <PropertyRef Name="codigo" />
+    </Key>
+    <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="empleadoes" Relationship="Self.FK__empleado__codigo__07C12930" FromRole="tipo_empleado" ToRole="empleado" />
+  </EntityType>
+  <EntityType Name="venta">
+    <Key>
+      <PropertyRef Name="id_venta" />
+    </Key>
+    <Property Name="id_venta" Type="Int32" Nullable="false" />
+    <Property Name="fecha_venta" Type="DateTime" Precision="0" />
+    <Property Name="codigo_repuesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cantidad" Type="Int32" />
+    <Property Name="precio_total" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="garantias" Relationship="Self.FK__garantia__id_ven__656C112C" FromRole="venta" ToRole="garantia" />
+    <NavigationProperty Name="repuesto" Relationship="Self.FK__venta__codigo_re__628FA481" FromRole="venta" ToRole="repuesto" />
+  </EntityType>
+  <Association Name="FK__repuesto__codigo__02FC7413">
+    <End Role="categoria" Type="Self.categoria" Multiplicity="0..1" />
+    <End Role="repuesto" Type="Self.repuesto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categoria">
+        <PropertyRef Name="codigo" />
+      </Principal>
+      <Dependent Role="repuesto">
+        <PropertyRef Name="codigo_categoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ciudad__codigo_d__0F624AF8">
+    <End Role="departamento" Type="Self.departamento" Multiplicity="0..1" />
+    <End Role="ciudad" Type="Self.ciudad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departamento">
+        <PropertyRef Name="codigo" />
+      </Principal>
+      <Dependent Role="ciudad">
+        <PropertyRef Name="codigo_departamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__proveedor__codig__10566F31">
+    <End Role="ciudad" Type="Self.ciudad" Multiplicity="0..1" />
+    <End Role="proveedor" Type="Self.proveedor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ciudad">
+        <PropertyRef Name="codigo" />
+      </Principal>
+      <Dependent Role="proveedor">
+        <PropertyRef Name="codigo_ciudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__cliente__id_moto__17F790F9">
+    <End Role="moto" Type="Self.moto" Multiplicity="0..1" />
+    <End Role="cliente" Type="Self.cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="moto">
+        <PropertyRef Name="id_moto" />
+      </Principal>
+      <Dependent Role="cliente">
+        <PropertyRef Name="id_moto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__compatibi__codig__1F98B2C1">
+    <End Role="repuesto" Type="Self.repuesto" Multiplicity="0..1" />
+    <End Role="compatibilidad" Type="Self.compatibilidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="repuesto">
+        <PropertyRef Name="codigo" />
+      </Principal>
+      <Dependent Role="compatibilidad">
+        <PropertyRef Name="codigo_repuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__compatibi__id_ma__208CD6FA">
+    <End Role="marca" Type="Self.marca" Multiplicity="0..1" />
+    <End Role="compatibilidad" Type="Self.compatibilidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marca">
+        <PropertyRef Name="id_marca" />
+      </Principal>
+      <Dependent Role="compatibilidad">
+        <PropertyRef Name="id_marca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__empleado__codigo__07C12930">
+    <End Role="tipo_empleado" Type="Self.tipo_empleado" Multiplicity="0..1" />
+    <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_empleado">
+        <PropertyRef Name="codigo" />
+      </Principal>
+      <Dependent Role="empleado">
+        <PropertyRef Name="codigo_tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__garantia__id_ven__656C112C">
+    <End Role="venta" Type="Self.venta" Multiplicity="0..1" />
+    <End Role="garantia" Type="Self.garantia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="venta">
+        <PropertyRef Name="id_venta" />
+      </Principal>
+      <Dependent Role="garantia">
+        <PropertyRef Name="id_venta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__venta__codigo_re__628FA481">
+    <End Role="repuesto" Type="Self.repuesto" Multiplicity="0..1" />
+    <End Role="venta" Type="Self.venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="repuesto">
+        <PropertyRef Name="codigo" />
+      </Principal>
+      <Dependent Role="venta">
+        <PropertyRef Name="codigo_repuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBTallerMotosEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categorias" EntityType="Self.categoria" />
+    <EntitySet Name="ciudads" EntityType="Self.ciudad" />
+    <EntitySet Name="clientes" EntityType="Self.cliente" />
+    <EntitySet Name="compatibilidads" EntityType="Self.compatibilidad" />
+    <EntitySet Name="departamentoes" EntityType="Self.departamento" />
+    <EntitySet Name="empleadoes" EntityType="Self.empleado" />
+    <EntitySet Name="garantias" EntityType="Self.garantia" />
+    <EntitySet Name="marcas" EntityType="Self.marca" />
+    <EntitySet Name="motoes" EntityType="Self.moto" />
+    <EntitySet Name="proveedors" EntityType="Self.proveedor" />
+    <EntitySet Name="repuestoes" EntityType="Self.repuesto" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tipo_empleado" EntityType="Self.tipo_empleado" />
+    <EntitySet Name="ventas" EntityType="Self.venta" />
+    <AssociationSet Name="FK__repuesto__codigo__02FC7413" Association="Self.FK__repuesto__codigo__02FC7413">
+      <End Role="categoria" EntitySet="categorias" />
+      <End Role="repuesto" EntitySet="repuestoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ciudad__codigo_d__0F624AF8" Association="Self.FK__ciudad__codigo_d__0F624AF8">
+      <End Role="departamento" EntitySet="departamentoes" />
+      <End Role="ciudad" EntitySet="ciudads" />
+    </AssociationSet>
+    <AssociationSet Name="FK__proveedor__codig__10566F31" Association="Self.FK__proveedor__codig__10566F31">
+      <End Role="ciudad" EntitySet="ciudads" />
+      <End Role="proveedor" EntitySet="proveedors" />
+    </AssociationSet>
+    <AssociationSet Name="FK__cliente__id_moto__17F790F9" Association="Self.FK__cliente__id_moto__17F790F9">
+      <End Role="moto" EntitySet="motoes" />
+      <End Role="cliente" EntitySet="clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__compatibi__codig__1F98B2C1" Association="Self.FK__compatibi__codig__1F98B2C1">
+      <End Role="repuesto" EntitySet="repuestoes" />
+      <End Role="compatibilidad" EntitySet="compatibilidads" />
+    </AssociationSet>
+    <AssociationSet Name="FK__compatibi__id_ma__208CD6FA" Association="Self.FK__compatibi__id_ma__208CD6FA">
+      <End Role="marca" EntitySet="marcas" />
+      <End Role="compatibilidad" EntitySet="compatibilidads" />
+    </AssociationSet>
+    <AssociationSet Name="FK__empleado__codigo__07C12930" Association="Self.FK__empleado__codigo__07C12930">
+      <End Role="tipo_empleado" EntitySet="tipo_empleado" />
+      <End Role="empleado" EntitySet="empleadoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__garantia__id_ven__656C112C" Association="Self.FK__garantia__id_ven__656C112C">
+      <End Role="venta" EntitySet="ventas" />
+      <End Role="garantia" EntitySet="garantias" />
+    </AssociationSet>
+    <AssociationSet Name="FK__venta__codigo_re__628FA481" Association="Self.FK__venta__codigo_re__628FA481">
+      <End Role="repuesto" EntitySet="repuestoes" />
+      <End Role="venta" EntitySet="ventas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
