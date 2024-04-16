@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DBTallerMotosModelStoreContainer" CdmEntityContainer="DBTallerMotosEntities">
-    <EntitySetMapping Name="categorias">
+    <EntitySetMapping Name="categoria">
       <EntityTypeMapping TypeName="DBTallerMotosModel.categoria">
         <MappingFragment StoreEntitySet="categoria">
           <ScalarProperty Name="codigo" ColumnName="codigo" />
@@ -9,7 +9,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ciudads">
+    <EntitySetMapping Name="ciudad">
       <EntityTypeMapping TypeName="DBTallerMotosModel.ciudad">
         <MappingFragment StoreEntitySet="ciudad">
           <ScalarProperty Name="codigo" ColumnName="codigo" />
@@ -18,7 +18,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="clientes">
+    <EntitySetMapping Name="cliente">
       <EntityTypeMapping TypeName="DBTallerMotosModel.cliente">
         <MappingFragment StoreEntitySet="cliente">
           <ScalarProperty Name="cedula_cliente" ColumnName="cedula_cliente" />
@@ -30,7 +30,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="compatibilidads">
+    <EntitySetMapping Name="compatibilidad">
       <EntityTypeMapping TypeName="DBTallerMotosModel.compatibilidad">
         <MappingFragment StoreEntitySet="compatibilidad">
           <ScalarProperty Name="id_compatibilidad" ColumnName="id_compatibilidad" />
@@ -40,7 +40,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="departamentoes">
+    <EntitySetMapping Name="departamento">
       <EntityTypeMapping TypeName="DBTallerMotosModel.departamento">
         <MappingFragment StoreEntitySet="departamento">
           <ScalarProperty Name="codigo" ColumnName="codigo" />
@@ -48,7 +48,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="empleadoes">
+    <EntitySetMapping Name="empleado">
       <EntityTypeMapping TypeName="DBTallerMotosModel.empleado">
         <MappingFragment StoreEntitySet="empleado">
           <ScalarProperty Name="cedula" ColumnName="cedula" />
@@ -59,7 +59,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="garantias">
+    <EntitySetMapping Name="garantia">
       <EntityTypeMapping TypeName="DBTallerMotosModel.garantia">
         <MappingFragment StoreEntitySet="garantia">
           <ScalarProperty Name="id_garantia" ColumnName="id_garantia" />
@@ -68,7 +68,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="marcas">
+    <EntitySetMapping Name="marca">
       <EntityTypeMapping TypeName="DBTallerMotosModel.marca">
         <MappingFragment StoreEntitySet="marca">
           <ScalarProperty Name="id_marca" ColumnName="id_marca" />
@@ -76,7 +76,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="motoes">
+    <EntitySetMapping Name="moto">
       <EntityTypeMapping TypeName="DBTallerMotosModel.moto">
         <MappingFragment StoreEntitySet="moto">
           <ScalarProperty Name="id_moto" ColumnName="id_moto" />
@@ -86,7 +86,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="proveedors">
+    <EntitySetMapping Name="proveedor">
       <EntityTypeMapping TypeName="DBTallerMotosModel.proveedor">
         <MappingFragment StoreEntitySet="proveedor">
           <ScalarProperty Name="id" ColumnName="id" />
@@ -96,7 +96,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="repuestoes">
+    <EntitySetMapping Name="repuesto">
       <EntityTypeMapping TypeName="DBTallerMotosModel.repuesto">
         <MappingFragment StoreEntitySet="repuesto">
           <ScalarProperty Name="codigo" ColumnName="codigo" />
@@ -108,7 +108,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="DBTallerMotosModel.sysdiagram">
+      <EntityTypeMapping TypeName="DBTallerMotosModel.sysdiagrams">
         <MappingFragment StoreEntitySet="sysdiagrams">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -126,7 +126,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ventas">
+    <EntitySetMapping Name="venta">
       <EntityTypeMapping TypeName="DBTallerMotosModel.venta">
         <MappingFragment StoreEntitySet="venta">
           <ScalarProperty Name="id_venta" ColumnName="id_venta" />

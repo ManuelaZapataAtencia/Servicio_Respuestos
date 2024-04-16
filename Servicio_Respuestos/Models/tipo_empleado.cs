@@ -16,12 +16,12 @@ namespace Servicio_Respuestos.Models
     {
         public tipo_empleado()
         {
-            this.empleadoes = new HashSet<empleado>();
+            this.empleado = new HashSet<empleado>();
         }
     
         public string codigo { get; set; }
         public string tipo { get; set; }
     
-        public virtual ICollection<empleado> empleadoes { get; set; }
+        public virtual ICollection<empleado> empleado { get; set; }
     }
 }

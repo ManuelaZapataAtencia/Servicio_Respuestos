@@ -242,7 +242,7 @@
     <Compile Include="Models\repuesto.cs">
       <DependentUpon>DBTallerMotos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>DBTallerMotos.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tipo_empleado.cs">

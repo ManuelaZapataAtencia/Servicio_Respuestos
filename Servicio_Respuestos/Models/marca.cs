@@ -16,12 +16,12 @@ namespace Servicio_Respuestos.Models
     {
         public marca()
         {
-            this.compatibilidads = new HashSet<compatibilidad>();
+            this.compatibilidad = new HashSet<compatibilidad>();
         }
     
         public string id_marca { get; set; }
         public string nombre { get; set; }
     
-        public virtual ICollection<compatibilidad> compatibilidads { get; set; }
+        public virtual ICollection<compatibilidad> compatibilidad { get; set; }
     }
 }

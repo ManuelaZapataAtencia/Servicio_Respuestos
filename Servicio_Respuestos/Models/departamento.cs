@@ -16,12 +16,12 @@ namespace Servicio_Respuestos.Models
     {
         public departamento()
         {
-            this.ciudads = new HashSet<ciudad>();
+            this.ciudad = new HashSet<ciudad>();
         }
     
         public string codigo { get; set; }
         public string nombre { get; set; }
     
-        public virtual ICollection<ciudad> ciudads { get; set; }
+        public virtual ICollection<ciudad> ciudad { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Servicio_Respuestos.Models
     {
         public ciudad()
         {
-            this.proveedors = new HashSet<proveedor>();
+            this.proveedor = new HashSet<proveedor>();
         }
     
         public string codigo { get; set; }
@@ -24,6 +24,6 @@ namespace Servicio_Respuestos.Models
         public string codigo_departamento { get; set; }
     
         public virtual departamento departamento { get; set; }
-        public virtual ICollection<proveedor> proveedors { get; set; }
+        public virtual ICollection<proveedor> proveedor { get; set; }
     }
 }

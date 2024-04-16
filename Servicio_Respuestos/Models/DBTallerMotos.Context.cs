@@ -25,19 +25,19 @@ namespace Servicio_Respuestos.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<categoria> categorias { get; set; }
-        public DbSet<ciudad> ciudads { get; set; }
-        public DbSet<cliente> clientes { get; set; }
-        public DbSet<compatibilidad> compatibilidads { get; set; }
-        public DbSet<departamento> departamentoes { get; set; }
-        public DbSet<empleado> empleadoes { get; set; }
-        public DbSet<garantia> garantias { get; set; }
-        public DbSet<marca> marcas { get; set; }
-        public DbSet<moto> motoes { get; set; }
-        public DbSet<proveedor> proveedors { get; set; }
-        public DbSet<repuesto> repuestoes { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
+        public DbSet<categoria> categoria { get; set; }
+        public DbSet<ciudad> ciudad { get; set; }
+        public DbSet<cliente> cliente { get; set; }
+        public DbSet<compatibilidad> compatibilidad { get; set; }
+        public DbSet<departamento> departamento { get; set; }
+        public DbSet<empleado> empleado { get; set; }
+        public DbSet<garantia> garantia { get; set; }
+        public DbSet<marca> marca { get; set; }
+        public DbSet<moto> moto { get; set; }
+        public DbSet<proveedor> proveedor { get; set; }
+        public DbSet<repuesto> repuesto { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<tipo_empleado> tipo_empleado { get; set; }
-        public DbSet<venta> ventas { get; set; }
+        public DbSet<venta> venta { get; set; }
     }
 }

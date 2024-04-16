@@ -17,8 +17,8 @@ namespace Servicio_Respuestos.Models
     {
         public repuesto()
         {
-            this.compatibilidads = new HashSet<compatibilidad>();
-            this.ventas = new HashSet<venta>();
+            this.compatibilidad = new HashSet<compatibilidad>();
+            this.venta = new HashSet<venta>();
         }
     
         public string codigo { get; set; }
@@ -29,8 +29,8 @@ namespace Servicio_Respuestos.Models
         [JsonIgnore]
         public virtual categoria categoria { get; set; }
         [JsonIgnore]
-        public virtual ICollection<compatibilidad> compatibilidads { get; set; }
+        public virtual ICollection<compatibilidad> compatibilidad { get; set; }
         [JsonIgnore]
-        public virtual ICollection<venta> ventas { get; set; }
+        public virtual ICollection<venta> venta { get; set; }
     }
 }

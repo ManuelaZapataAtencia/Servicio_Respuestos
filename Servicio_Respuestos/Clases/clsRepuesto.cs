@@ -17,7 +17,7 @@ namespace Servicio_Respuestos.Clases
         {
             try
             {
-                dbTaller.repuestoes.Add(repuesto);
+                dbTaller.repuesto.Add(repuesto);
                 dbTaller.SaveChanges();
                 return "Se insertó el repuesto: " + repuesto.nombre + "";
             }
@@ -31,7 +31,7 @@ namespace Servicio_Respuestos.Clases
         {
             try
             {
-                dbTaller.repuestoes.AddOrUpdate(repuesto);
+                dbTaller.repuesto.AddOrUpdate(repuesto);
                 dbTaller.SaveChanges();
                 return "Se actualizaron los datos del repuesto: " + repuesto.nombre + " ";
             }
@@ -46,7 +46,7 @@ namespace Servicio_Respuestos.Clases
             try
             {
                 repuesto _repuesto = Consultar(repuesto.codigo);
-                dbTaller.repuestoes.Remove(_repuesto);
+                dbTaller.repuesto.Remove(_repuesto);
                 dbTaller.SaveChanges();
                 return "Se eliminó el repuesto: " + repuesto.nombre;
             }
@@ -59,13 +59,13 @@ namespace Servicio_Respuestos.Clases
         // consulta especifica
         public repuesto Consultar(string codigo)
         {
-            return dbTaller.repuestoes.FirstOrDefault(e => e.codigo == codigo);
+            return dbTaller.repuesto.FirstOrDefault(e => e.codigo == codigo);
         }
 
         // consulta general
         public List<repuesto> ConsultarTodos()
         {
-            return dbTaller.repuestoes.ToList();
+            return dbTaller.repuesto.ToList();
         }
 
         public IQueryable ListarTodosConTipo()

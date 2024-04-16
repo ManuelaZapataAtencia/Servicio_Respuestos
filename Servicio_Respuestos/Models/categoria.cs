@@ -9,6 +9,7 @@
 
 namespace Servicio_Respuestos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -16,12 +17,13 @@ namespace Servicio_Respuestos.Models
     {
         public categoria()
         {
-            this.repuestoes = new HashSet<repuesto>();
+            this.repuesto = new HashSet<repuesto>();
         }
     
         public string codigo { get; set; }
         public string nombre { get; set; }
-    
-        public virtual ICollection<repuesto> repuestoes { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<repuesto> repuesto { get; set; }
     }
 }

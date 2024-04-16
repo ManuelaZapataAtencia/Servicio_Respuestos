@@ -16,7 +16,7 @@ namespace Servicio_Respuestos.Models
     {
         public moto()
         {
-            this.clientes = new HashSet<cliente>();
+            this.cliente = new HashSet<cliente>();
         }
     
         public string id_moto { get; set; }
@@ -24,6 +24,6 @@ namespace Servicio_Respuestos.Models
         public string modelo { get; set; }
         public string Año { get; set; }
     
-        public virtual ICollection<cliente> clientes { get; set; }
+        public virtual ICollection<cliente> cliente { get; set; }
     }
 }

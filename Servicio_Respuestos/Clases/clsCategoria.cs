@@ -12,7 +12,7 @@ namespace Servicio_Respuestos.Clases
         public categoria categoriaRepuesto { get; set; }
         public List<categoria> ConsultarCategorias()
         {
-            return dbTaller.categorias.OrderBy(c => c.nombre).ToList();
+            return dbTaller.categoria.OrderBy(c => c.nombre).ToList();
         }
     }
 }

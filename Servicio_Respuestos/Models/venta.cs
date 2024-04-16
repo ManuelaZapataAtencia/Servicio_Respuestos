@@ -16,7 +16,7 @@ namespace Servicio_Respuestos.Models
     {
         public venta()
         {
-            this.garantias = new HashSet<garantia>();
+            this.garantia = new HashSet<garantia>();
         }
     
         public int id_venta { get; set; }
@@ -25,7 +25,7 @@ namespace Servicio_Respuestos.Models
         public Nullable<int> cantidad { get; set; }
         public Nullable<decimal> precio_total { get; set; }
     
-        public virtual ICollection<garantia> garantias { get; set; }
+        public virtual ICollection<garantia> garantia { get; set; }
         public virtual repuesto repuesto { get; set; }
     }
 }

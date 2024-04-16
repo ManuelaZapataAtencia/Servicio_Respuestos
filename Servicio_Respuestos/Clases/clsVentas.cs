@@ -18,7 +18,7 @@ namespace Servicio_Respuestos.Clases
         {
             try
             {
-                dbTaller.ventas.Add(venta);
+                dbTaller.venta.Add(venta);
                 dbTaller.SaveChanges();
                 return "Se ha insertado una nueva venta";
             }
@@ -32,7 +32,7 @@ namespace Servicio_Respuestos.Clases
         {
             try
             {
-                dbTaller.ventas.AddOrUpdate(venta);
+                dbTaller.venta.AddOrUpdate(venta);
                 dbTaller.SaveChanges();
                 return "Se ha actualizado la venta";
             }
@@ -47,7 +47,7 @@ namespace Servicio_Respuestos.Clases
             try
             {
                 venta _venta = Consultar(venta.id_venta);
-                dbTaller.ventas.Remove(_venta);
+                dbTaller.venta.Remove(_venta);
                 dbTaller.SaveChanges();
                 return "se ha eliminado la venta";
             }
@@ -60,13 +60,13 @@ namespace Servicio_Respuestos.Clases
         // consulta especifica
         public venta Consultar(int id_venta)
         {
-            return dbTaller.ventas.FirstOrDefault(e => e.id_venta == id_venta);
+            return dbTaller.venta.FirstOrDefault(e => e.id_venta == id_venta);
         }
 
         // consulta general
         public List<venta> ConsultarTodos()
         {
-            return dbTaller.ventas.ToList();
+            return dbTaller.venta.ToList();
         }
     }
 }

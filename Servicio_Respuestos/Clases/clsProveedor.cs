@@ -18,7 +18,7 @@ namespace Servicio_Respuestos.Clases
         {
             try
             {
-                dbTaller.proveedors.Add(proveedor);
+                dbTaller.proveedor.Add(proveedor);
                 dbTaller.SaveChanges();
                 return "Se ha registrado al proveedor: " + proveedor.nombre + "";
             }
@@ -32,7 +32,7 @@ namespace Servicio_Respuestos.Clases
         {
             try
             {
-                dbTaller.proveedors.AddOrUpdate(proveedor);
+                dbTaller.proveedor.AddOrUpdate(proveedor);
                 dbTaller.SaveChanges();
                 return "Se actualizaron los datos del proveedor: " + proveedor.nombre + "";
             }
@@ -47,8 +47,7 @@ namespace Servicio_Respuestos.Clases
             try
             {
                 proveedor _proveedor = Consultar(proveedor.id);
-
-                dbTaller.proveedors.Remove(_proveedor);
+                dbTaller.proveedor.Remove(_proveedor);
                 dbTaller.SaveChanges();
                 return "se ha eliminado al proveedor: " + proveedor.nombre + "";
             }
@@ -61,13 +60,13 @@ namespace Servicio_Respuestos.Clases
         // consulta especifica
         public proveedor Consultar(string id)
         {
-            return dbTaller.proveedors.FirstOrDefault(e => e.id == id);
+            return dbTaller.proveedor.FirstOrDefault(e => e.id == id);
         }
 
         // consulta general
         public List<proveedor> ConsultarTodos()
         {
-            return dbTaller.proveedors.ToList();
+            return dbTaller.proveedor.ToList();
         }
     }
 }
