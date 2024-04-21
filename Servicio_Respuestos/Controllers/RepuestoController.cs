@@ -16,7 +16,7 @@ namespace Servicio_Respuestos.Controllers
         public IQueryable Get()
         {
             clsRepuesto _repuesto = new clsRepuesto();
-            return _repuesto.ListarTodosConTipo();
+            return _repuesto.ListarTodosConCategoria();
         }
 
         // GET api/<controller>/5

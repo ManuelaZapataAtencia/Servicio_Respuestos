@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
@@ -13,11 +14,24 @@ namespace Servicio_Respuestos.Clases
         private DBTallerMotosEntities dbTaller = new DBTallerMotosEntities();
         public venta venta { get; set; }
 
+        public void CalcularPrecioTotal()
+        {
+            var precioProducto = dbTaller.repuesto
+                .Where(r => r.codigo.Equals(venta.codigo_repuesto))
+                .Select(r => r.precio)
+                .FirstOrDefault();
+            if (precioProducto != null)
+            {
+                venta.precio_total = (decimal?)(venta.cantidad * Convert.ToDouble(precioProducto));
+            }
+        }
+
         //Método insertar
         public string Insertar()
         {
             try
             {
+                CalcularPrecioTotal();
                 dbTaller.venta.Add(venta);
                 dbTaller.SaveChanges();
                 return "Se ha insertado una nueva venta";
@@ -32,6 +46,7 @@ namespace Servicio_Respuestos.Clases
         {
             try
             {
+                CalcularPrecioTotal();
                 dbTaller.venta.AddOrUpdate(venta);
                 dbTaller.SaveChanges();
                 return "Se ha actualizado la venta";
