@@ -13,11 +13,10 @@ namespace Servicio_Respuestos.Controllers
     [EnableCors(origins: "http://localhost:53331", headers: "*", methods: "*")]
     public class ProveedorController : ApiController
     {
-        // GET api/<controller>
-        public List<proveedor> Get()
+        public IQueryable Get()
         {
-            clsProveedor _proveedores = new clsProveedor();
-            return _proveedores.ConsultarTodos();
+            clsProveedor _proveedor = new clsProveedor();
+            return _proveedor.ListarTodosConCiudad();
         }
 
         // GET api/<controller>/5

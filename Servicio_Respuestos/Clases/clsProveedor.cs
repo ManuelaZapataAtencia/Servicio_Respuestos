@@ -68,5 +68,20 @@ namespace Servicio_Respuestos.Clases
         {
             return dbTaller.proveedor.ToList();
         }
+
+        public IQueryable ListarTodosConCiudad()
+        {
+            return from c in dbTaller.Set<ciudad>()
+                   join p in dbTaller.Set<proveedor>()
+                   on c.codigo equals p.codigo_ciudad
+                   orderby c.nombre, p.nombre
+                   select new
+                   {
+                       Cedula = p.id,
+                       Nombre = p.nombre,
+                       Telefono = p.telefono,
+                       Ciudad = c.nombre,
+                   };
+        }
     }
 }

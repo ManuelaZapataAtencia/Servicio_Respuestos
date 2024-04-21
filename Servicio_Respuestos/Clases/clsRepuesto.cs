@@ -4,7 +4,6 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using Servicio_Respuestos.Models;
-using System.Linq;
 
 namespace Servicio_Respuestos.Clases
 {
@@ -69,6 +68,12 @@ namespace Servicio_Respuestos.Clases
             return dbTaller.repuesto.ToList();
         }
 
+        // Metodo que listara los repuestos en la lista desplegable
+        public List<repuesto> ListarRepuestos()
+        {
+            return dbTaller.repuesto.ToList();
+        }
+
         public IQueryable ListarTodosConCategoria()
         {
             return from c in dbTaller.Set<categoria>()
@@ -84,12 +89,6 @@ namespace Servicio_Respuestos.Clases
                        Descripcion = r.descripcion,
                        Precio = r.precio,
                    };
-        }
-
-        // Metodo que listara los repuestos en la lista desplegable
-        public List<repuesto> ListarRepuestos()
-        {
-            return dbTaller.repuesto.ToList();          
         }
     }
 }

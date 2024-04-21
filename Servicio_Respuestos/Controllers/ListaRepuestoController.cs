@@ -11,13 +11,12 @@ using System.Web.Mvc;
 namespace Servicio_Respuestos.Controllers
 {
     [EnableCors(origins: "http://localhost:53331", headers: "*", methods: "*")]
-    public class CategoriaController : ApiController
+    public class ListaRepuestoController : ApiController
     {
-        // GET api/<controller>
-        public List<categoria> Get()
+        public List<repuesto> Get()
         {
-            clsListas _listas = new clsListas();
-            return _listas.ConsultarCategorias();
+            clsRepuesto _repuesto = new clsRepuesto();
+            return _repuesto.ListarRepuestos();
         }
     }
 }
