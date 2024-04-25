@@ -79,14 +79,13 @@ namespace Servicio_Respuestos.Clases
             return from c in dbTaller.Set<categoria>()
                    join r in dbTaller.Set<repuesto>()
                    on c.codigo equals r.codigo_categoria
-                   orderby c.nombre, r.nombre
+                   orderby r.nombre
                    select new
-                   {
-                       Codigo_Categoria = c.codigo,
-                       Categoria = c.nombre,
+                   {   
                        Codigo = r.codigo,
                        Nombre = r.nombre,
                        Descripcion = r.descripcion,
+                       Categoria = c.nombre,
                        Precio = r.precio,
                    };
         }

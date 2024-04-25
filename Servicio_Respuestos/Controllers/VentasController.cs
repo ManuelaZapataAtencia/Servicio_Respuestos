@@ -13,11 +13,10 @@ namespace Servicio_Respuestos.Controllers
     [EnableCors(origins: "http://localhost:53331", headers: "*", methods: "*")]
     public class VentasController : ApiController
     {
-        // GET api/<controller>
-        public List<venta> Get()
+        public IQueryable Get()
         {
             clsVentas _ventas = new clsVentas();
-            return _ventas.ConsultarTodos();
+            return _ventas.ListarTodosConRepuesto();
         }
 
         // GET api/<controller>/5

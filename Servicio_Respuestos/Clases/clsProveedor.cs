@@ -74,7 +74,7 @@ namespace Servicio_Respuestos.Clases
             return from c in dbTaller.Set<ciudad>()
                    join p in dbTaller.Set<proveedor>()
                    on c.codigo equals p.codigo_ciudad
-                   orderby c.nombre, p.nombre
+                   orderby p.id
                    select new
                    {
                        Cedula = p.id,

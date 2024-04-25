@@ -83,5 +83,22 @@ namespace Servicio_Respuestos.Clases
         {
             return dbTaller.venta.ToList();
         }
+
+        public IQueryable ListarTodosConRepuesto()
+        {
+            return from r in dbTaller.Set<repuesto>()
+                   join v in dbTaller.Set<venta>()
+                   on r.codigo equals v.codigo_repuesto
+                   orderby r.nombre
+                   select new
+                   {
+                       Codigo = v.id_venta,
+                       Fecha = v.fecha_venta,
+                       Repuesto = r.nombre,
+                       Precio = r.precio,
+                       Cantidad = v.cantidad,
+                       Total = v.precio_total
+                   };
+        }
     }
 }
