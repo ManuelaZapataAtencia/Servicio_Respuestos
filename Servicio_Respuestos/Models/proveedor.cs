@@ -15,11 +15,11 @@ namespace Servicio_Respuestos.Models
     
     public partial class proveedor
     {
-        public string id { get; set; }
+        public string nit { get; set; }
         public string nombre { get; set; }
         public string telefono { get; set; }
-        public string codigo_ciudad { get; set; }
-        
+        public string correo { get; set; }
+        public Nullable<int> codigo_ciudad { get; set; }
         [JsonIgnore]
         public virtual ciudad ciudad { get; set; }
     }

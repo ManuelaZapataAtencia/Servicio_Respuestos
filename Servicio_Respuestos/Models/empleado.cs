@@ -18,7 +18,7 @@ namespace Servicio_Respuestos.Models
         public string nombre { get; set; }
         public Nullable<int> edad { get; set; }
         public string correo { get; set; }
-        public string codigo_tipo { get; set; }
+        public Nullable<int> codigo_tipo { get; set; }
     
         public virtual tipo_empleado tipo_empleado { get; set; }
     }

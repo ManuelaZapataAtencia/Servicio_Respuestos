@@ -19,7 +19,7 @@ namespace Servicio_Respuestos.Models
             this.empleado = new HashSet<empleado>();
         }
     
-        public string codigo { get; set; }
+        public int codigo { get; set; }
         public string tipo { get; set; }
     
         public virtual ICollection<empleado> empleado { get; set; }

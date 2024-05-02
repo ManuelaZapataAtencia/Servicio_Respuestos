@@ -20,12 +20,12 @@ namespace Servicio_Respuestos.Models
             this.garantia = new HashSet<garantia>();
         }
     
-        public int id_venta { get; set; }
+        public int codigo { get; set; }
         public Nullable<System.DateTime> fecha_venta { get; set; }
         public string codigo_repuesto { get; set; }
         public Nullable<int> cantidad { get; set; }
         public Nullable<decimal> precio_total { get; set; }
-    
+
         [JsonIgnore]
         public virtual ICollection<garantia> garantia { get; set; }
         [JsonIgnore]

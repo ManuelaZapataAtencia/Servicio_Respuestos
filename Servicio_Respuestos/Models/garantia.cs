@@ -14,8 +14,8 @@ namespace Servicio_Respuestos.Models
     
     public partial class garantia
     {
-        public int id_garantia { get; set; }
-        public Nullable<int> id_venta { get; set; }
+        public int codigo { get; set; }
+        public Nullable<int> codigo_venta { get; set; }
         public Nullable<int> duracion { get; set; }
     
         public virtual venta venta { get; set; }

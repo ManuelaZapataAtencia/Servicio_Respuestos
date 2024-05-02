@@ -19,7 +19,7 @@ namespace Servicio_Respuestos.Models
             this.ciudad = new HashSet<ciudad>();
         }
     
-        public string codigo { get; set; }
+        public int codigo { get; set; }
         public string nombre { get; set; }
     
         public virtual ICollection<ciudad> ciudad { get; set; }

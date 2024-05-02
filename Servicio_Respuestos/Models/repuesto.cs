@@ -26,6 +26,7 @@ namespace Servicio_Respuestos.Models
         public string descripcion { get; set; }
         public Nullable<decimal> precio { get; set; }
         public string codigo_categoria { get; set; }
+
         [JsonIgnore]
         public virtual categoria categoria { get; set; }
         [JsonIgnore]

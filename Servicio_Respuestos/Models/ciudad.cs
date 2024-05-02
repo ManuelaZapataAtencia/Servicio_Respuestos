@@ -20,10 +20,10 @@ namespace Servicio_Respuestos.Models
             this.proveedor = new HashSet<proveedor>();
         }
     
-        public string codigo { get; set; }
+        public int codigo { get; set; }
         public string nombre { get; set; }
-        public string codigo_departamento { get; set; }
-        
+        public Nullable<int> codigo_departamento { get; set; }
+    
         [JsonIgnore]
         public virtual departamento departamento { get; set; }
         [JsonIgnore]
