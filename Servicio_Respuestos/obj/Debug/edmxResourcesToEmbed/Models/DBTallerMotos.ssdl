@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DBTallerMotosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.asociar_marca_moto' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
-        <EntityType Name="asociar_marca_moto">
+advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.asociar' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="asociar">
           <Property Name="id_moto" Type="varchar" MaxLength="20" />
           <Property Name="id_marca" Type="varchar" MaxLength="20" />
         </EntityType>-->
@@ -17,9 +17,9 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.asociar_marca_moto' no tie
     <Key>
       <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="codigo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="50" />
-    <Property Name="codigo_departamento" Type="varchar" MaxLength="50" />
+    <Property Name="codigo_departamento" Type="int" />
   </EntityType>
   <EntityType Name="cliente">
     <Key>
@@ -45,7 +45,7 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.asociar_marca_moto' no tie
     <Key>
       <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="codigo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="empleado">
@@ -56,14 +56,14 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.asociar_marca_moto' no tie
     <Property Name="nombre" Type="varchar" MaxLength="50" />
     <Property Name="edad" Type="int" />
     <Property Name="correo" Type="varchar" MaxLength="50" />
-    <Property Name="codigo_tipo" Type="varchar" MaxLength="50" />
+    <Property Name="codigo_tipo" Type="int" />
   </EntityType>
   <EntityType Name="garantia">
     <Key>
-      <PropertyRef Name="id_garantia" />
+      <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="id_garantia" Type="int" Nullable="false" />
-    <Property Name="id_venta" Type="int" />
+    <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="codigo_venta" Type="int" />
     <Property Name="duracion" Type="int" />
   </EntityType>
   <EntityType Name="marca">
@@ -84,12 +84,13 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.asociar_marca_moto' no tie
   </EntityType>
   <EntityType Name="proveedor">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="nit" />
     </Key>
-    <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nit" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="50" />
     <Property Name="telefono" Type="varchar" MaxLength="50" />
-    <Property Name="codigo_ciudad" Type="varchar" MaxLength="50" />
+    <Property Name="correo" Type="varchar" MaxLength="50" />
+    <Property Name="codigo_ciudad" Type="int" />
   </EntityType>
   <EntityType Name="repuesto">
     <Key>
@@ -105,7 +106,9 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.asociar_marca_moto' no tie
 advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.suministrar' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
         <EntityType Name="suministrar">
           <Property Name="codigo" Type="varchar" MaxLength="50" />
-          <Property Name="id" Type="varchar" MaxLength="50" />
+          <Property Name="nit_proveedor" Type="varchar" MaxLength="50" />
+          <Property Name="detalle_suministro" Type="varchar" MaxLength="50" />
+          <Property Name="cantidad_suministro" Type="int" />
         </EntityType>-->
   <EntityType Name="sysdiagrams">
     <Key>
@@ -121,7 +124,7 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.suministrar' no tiene defi
     <Key>
       <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="codigo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tipo" Type="varchar" MaxLength="50" />
   </EntityType>
   <!--Errores durante la generación:
@@ -132,21 +135,21 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.vender' no tiene definida 
         </EntityType>-->
   <EntityType Name="venta">
     <Key>
-      <PropertyRef Name="id_venta" />
+      <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="id_venta" Type="int" Nullable="false" />
+    <Property Name="codigo" Type="int" Nullable="false" />
     <Property Name="fecha_venta" Type="date" />
     <Property Name="codigo_repuesto" Type="varchar" MaxLength="50" />
     <Property Name="cantidad" Type="int" />
-    <Property Name="precio_total" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="precio_total" Type="money" />
   </EntityType>
   <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.asociar_marca_moto', pero no se encuentra la tabla.
+error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.asociar', pero no se encuentra la tabla.
         <Association Name="FK__asociar_m__id_ma__1CBC4616" />-->
   <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.asociar_marca_moto', pero no se encuentra la tabla.
+error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.asociar', pero no se encuentra la tabla.
         <Association Name="FK__asociar_m__id_mo__1BC821DD" />-->
-  <Association Name="FK__ciudad__codigo_d__0F624AF8">
+  <Association Name="FK__ciudad__codigo_d__2DE6D218">
     <End Role="departamento" Type="Self.departamento" Multiplicity="0..1" />
     <End Role="ciudad" Type="Self.ciudad" Multiplicity="*" />
     <ReferentialConstraint>
@@ -194,7 +197,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.asociar_
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__empleado__codigo__07C12930">
+  <Association Name="FK__empleado__codigo__3B40CD36">
     <End Role="tipo_empleado" Type="Self.tipo_empleado" Multiplicity="0..1" />
     <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
     <ReferentialConstraint>
@@ -206,19 +209,19 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.asociar_
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__garantia__id_ven__656C112C">
+  <Association Name="FK__garantia__codigo__339FAB6E">
     <End Role="venta" Type="Self.venta" Multiplicity="0..1" />
     <End Role="garantia" Type="Self.garantia" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="venta">
-        <PropertyRef Name="id_venta" />
+        <PropertyRef Name="codigo" />
       </Principal>
       <Dependent Role="garantia">
-        <PropertyRef Name="id_venta" />
+        <PropertyRef Name="codigo_venta" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__proveedor__codig__10566F31">
+  <Association Name="FK__proveedor__codig__4D5F7D71">
     <End Role="ciudad" Type="Self.ciudad" Multiplicity="0..1" />
     <End Role="proveedor" Type="Self.proveedor" Multiplicity="*" />
     <ReferentialConstraint>
@@ -250,10 +253,10 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.suminist
         <Association Name="FK__repuesto_pro__id__49C3F6B7" />-->
   <!--Errores durante la generación:
 error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender', pero no se encuentra la tabla.
-        <Association Name="FK__vender__cedula_e__0A9D95DB" />-->
+        <Association Name="FK__vender__cedula_e__3E1D39E1" />-->
   <!--Errores durante la generación:
 error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender', pero no se encuentra la tabla.
-        <Association Name="FK__vender__codigo_r__09A971A2" />-->
+        <Association Name="FK__vender__codigo_r__3D2915A8" />-->
   <Association Name="FK__venta__codigo_re__628FA481">
     <End Role="repuesto" Type="Self.repuesto" Multiplicity="0..1" />
     <End Role="venta" Type="Self.venta" Multiplicity="*" />
@@ -281,7 +284,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tipo_empleado" EntityType="Self.tipo_empleado" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="venta" EntityType="Self.venta" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__ciudad__codigo_d__0F624AF8" Association="Self.FK__ciudad__codigo_d__0F624AF8">
+    <AssociationSet Name="FK__ciudad__codigo_d__2DE6D218" Association="Self.FK__ciudad__codigo_d__2DE6D218">
       <End Role="departamento" EntitySet="departamento" />
       <End Role="ciudad" EntitySet="ciudad" />
     </AssociationSet>
@@ -297,15 +300,15 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
       <End Role="marca" EntitySet="marca" />
       <End Role="compatibilidad" EntitySet="compatibilidad" />
     </AssociationSet>
-    <AssociationSet Name="FK__empleado__codigo__07C12930" Association="Self.FK__empleado__codigo__07C12930">
+    <AssociationSet Name="FK__empleado__codigo__3B40CD36" Association="Self.FK__empleado__codigo__3B40CD36">
       <End Role="tipo_empleado" EntitySet="tipo_empleado" />
       <End Role="empleado" EntitySet="empleado" />
     </AssociationSet>
-    <AssociationSet Name="FK__garantia__id_ven__656C112C" Association="Self.FK__garantia__id_ven__656C112C">
+    <AssociationSet Name="FK__garantia__codigo__339FAB6E" Association="Self.FK__garantia__codigo__339FAB6E">
       <End Role="venta" EntitySet="venta" />
       <End Role="garantia" EntitySet="garantia" />
     </AssociationSet>
-    <AssociationSet Name="FK__proveedor__codig__10566F31" Association="Self.FK__proveedor__codig__10566F31">
+    <AssociationSet Name="FK__proveedor__codig__4D5F7D71" Association="Self.FK__proveedor__codig__4D5F7D71">
       <End Role="ciudad" EntitySet="ciudad" />
       <End Role="proveedor" EntitySet="proveedor" />
     </AssociationSet>

@@ -61,7 +61,7 @@ namespace Servicio_Respuestos.Clases
         {
             try
             {
-                venta _venta = Consultar(venta.id_venta);
+                venta _venta = Consultar(venta.codigo);
                 dbTaller.venta.Remove(_venta);
                 dbTaller.SaveChanges();
                 return "se ha eliminado la venta";
@@ -75,7 +75,7 @@ namespace Servicio_Respuestos.Clases
         // consulta especifica
         public venta Consultar(int id_venta)
         {
-            return dbTaller.venta.FirstOrDefault(e => e.id_venta == id_venta);
+            return dbTaller.venta.FirstOrDefault(e => e.codigo == id_venta);
         }
 
         // consulta general
@@ -92,7 +92,7 @@ namespace Servicio_Respuestos.Clases
                    orderby r.nombre
                    select new
                    {
-                       Codigo = v.id_venta,
+                       Codigo = v.codigo,
                        Fecha = v.fecha_venta,
                        Repuesto = r.nombre,
                        Precio = r.precio,

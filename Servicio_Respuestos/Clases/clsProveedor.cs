@@ -46,7 +46,7 @@ namespace Servicio_Respuestos.Clases
         {
             try
             {
-                proveedor _proveedor = Consultar(proveedor.id);
+                proveedor _proveedor = Consultar(proveedor.nit);
                 dbTaller.proveedor.Remove(_proveedor);
                 dbTaller.SaveChanges();
                 return "se ha eliminado al proveedor: " + proveedor.nombre + "";
@@ -58,9 +58,9 @@ namespace Servicio_Respuestos.Clases
         }
 
         // consulta especifica
-        public proveedor Consultar(string id)
+        public proveedor Consultar(string nit)
         {
-            return dbTaller.proveedor.FirstOrDefault(e => e.id == id);
+            return dbTaller.proveedor.FirstOrDefault(e => e.nit == nit);
         }
 
         // consulta general
@@ -74,10 +74,10 @@ namespace Servicio_Respuestos.Clases
             return from c in dbTaller.Set<ciudad>()
                    join p in dbTaller.Set<proveedor>()
                    on c.codigo equals p.codigo_ciudad
-                   orderby p.id
+                   orderby p.nit
                    select new
                    {
-                       Cedula = p.id,
+                       Nit = p.nit,
                        Nombre = p.nombre,
                        Telefono = p.telefono,
                        Ciudad = c.nombre,

@@ -62,8 +62,8 @@
     <EntitySetMapping Name="garantia">
       <EntityTypeMapping TypeName="DBTallerMotosModel.garantia">
         <MappingFragment StoreEntitySet="garantia">
-          <ScalarProperty Name="id_garantia" ColumnName="id_garantia" />
-          <ScalarProperty Name="id_venta" ColumnName="id_venta" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="codigo_venta" ColumnName="codigo_venta" />
           <ScalarProperty Name="duracion" ColumnName="duracion" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -89,9 +89,10 @@
     <EntitySetMapping Name="proveedor">
       <EntityTypeMapping TypeName="DBTallerMotosModel.proveedor">
         <MappingFragment StoreEntitySet="proveedor">
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nit" ColumnName="nit" />
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
           <ScalarProperty Name="codigo_ciudad" ColumnName="codigo_ciudad" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -129,7 +130,7 @@
     <EntitySetMapping Name="venta">
       <EntityTypeMapping TypeName="DBTallerMotosModel.venta">
         <MappingFragment StoreEntitySet="venta">
-          <ScalarProperty Name="id_venta" ColumnName="id_venta" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
           <ScalarProperty Name="fecha_venta" ColumnName="fecha_venta" />
           <ScalarProperty Name="codigo_repuesto" ColumnName="codigo_repuesto" />
           <ScalarProperty Name="cantidad" ColumnName="cantidad" />

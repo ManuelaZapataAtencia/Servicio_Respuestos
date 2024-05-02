@@ -20,10 +20,10 @@ namespace Servicio_Respuestos.Controllers
         }
 
         // GET api/<controller>/5
-        public proveedor Get(string id)
+        public proveedor Get(string nit)
         {
             clsProveedor _proveedor = new clsProveedor();
-            return _proveedor.Consultar(id);
+            return _proveedor.Consultar(nit);
         }
 
         // POST api/<controller>

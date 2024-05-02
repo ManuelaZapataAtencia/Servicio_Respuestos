@@ -12,11 +12,11 @@
     <Key>
       <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="codigo_departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="departamento" Relationship="Self.FK__ciudad__codigo_d__0F624AF8" FromRole="ciudad" ToRole="departamento" />
-    <NavigationProperty Name="proveedor" Relationship="Self.FK__proveedor__codig__10566F31" FromRole="ciudad" ToRole="proveedor" />
+    <Property Name="codigo_departamento" Type="Int32" />
+    <NavigationProperty Name="departamento" Relationship="Self.FK__ciudad__codigo_d__2DE6D218" FromRole="ciudad" ToRole="departamento" />
+    <NavigationProperty Name="proveedor" Relationship="Self.FK__proveedor__codig__4D5F7D71" FromRole="ciudad" ToRole="proveedor" />
   </EntityType>
   <EntityType Name="cliente">
     <Key>
@@ -45,9 +45,9 @@
     <Key>
       <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="ciudad" Relationship="Self.FK__ciudad__codigo_d__0F624AF8" FromRole="departamento" ToRole="ciudad" />
+    <NavigationProperty Name="ciudad" Relationship="Self.FK__ciudad__codigo_d__2DE6D218" FromRole="departamento" ToRole="ciudad" />
   </EntityType>
   <EntityType Name="empleado">
     <Key>
@@ -57,17 +57,17 @@
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="edad" Type="Int32" />
     <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="codigo_tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="tipo_empleado" Relationship="Self.FK__empleado__codigo__07C12930" FromRole="empleado" ToRole="tipo_empleado" />
+    <Property Name="codigo_tipo" Type="Int32" />
+    <NavigationProperty Name="tipo_empleado" Relationship="Self.FK__empleado__codigo__3B40CD36" FromRole="empleado" ToRole="tipo_empleado" />
   </EntityType>
   <EntityType Name="garantia">
     <Key>
-      <PropertyRef Name="id_garantia" />
+      <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="id_garantia" Type="Int32" Nullable="false" />
-    <Property Name="id_venta" Type="Int32" />
+    <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codigo_venta" Type="Int32" />
     <Property Name="duracion" Type="Int32" />
-    <NavigationProperty Name="venta" Relationship="Self.FK__garantia__id_ven__656C112C" FromRole="garantia" ToRole="venta" />
+    <NavigationProperty Name="venta" Relationship="Self.FK__garantia__codigo__339FAB6E" FromRole="garantia" ToRole="venta" />
   </EntityType>
   <EntityType Name="marca">
     <Key>
@@ -89,13 +89,14 @@
   </EntityType>
   <EntityType Name="proveedor">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="nit" />
     </Key>
-    <Property Name="id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="codigo_ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="ciudad" Relationship="Self.FK__proveedor__codig__10566F31" FromRole="proveedor" ToRole="ciudad" />
+    <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="codigo_ciudad" Type="Int32" />
+    <NavigationProperty Name="ciudad" Relationship="Self.FK__proveedor__codig__4D5F7D71" FromRole="proveedor" ToRole="ciudad" />
   </EntityType>
   <EntityType Name="repuesto">
     <Key>
@@ -124,20 +125,20 @@
     <Key>
       <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="empleado" Relationship="Self.FK__empleado__codigo__07C12930" FromRole="tipo_empleado" ToRole="empleado" />
+    <NavigationProperty Name="empleado" Relationship="Self.FK__empleado__codigo__3B40CD36" FromRole="tipo_empleado" ToRole="empleado" />
   </EntityType>
   <EntityType Name="venta">
     <Key>
-      <PropertyRef Name="id_venta" />
+      <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="id_venta" Type="Int32" Nullable="false" />
+    <Property Name="codigo" Type="Int32" Nullable="false" />
     <Property Name="fecha_venta" Type="DateTime" Precision="0" />
     <Property Name="codigo_repuesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="cantidad" Type="Int32" />
-    <Property Name="precio_total" Type="Decimal" Precision="10" Scale="2" />
-    <NavigationProperty Name="garantia" Relationship="Self.FK__garantia__id_ven__656C112C" FromRole="venta" ToRole="garantia" />
+    <Property Name="precio_total" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="garantia" Relationship="Self.FK__garantia__codigo__339FAB6E" FromRole="venta" ToRole="garantia" />
     <NavigationProperty Name="repuesto" Relationship="Self.FK__venta__codigo_re__628FA481" FromRole="venta" ToRole="repuesto" />
   </EntityType>
   <Association Name="FK__repuesto__codigo__02FC7413">
@@ -152,7 +153,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ciudad__codigo_d__0F624AF8">
+  <Association Name="FK__ciudad__codigo_d__2DE6D218">
     <End Role="departamento" Type="Self.departamento" Multiplicity="0..1" />
     <End Role="ciudad" Type="Self.ciudad" Multiplicity="*" />
     <ReferentialConstraint>
@@ -164,7 +165,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__proveedor__codig__10566F31">
+  <Association Name="FK__proveedor__codig__4D5F7D71">
     <End Role="ciudad" Type="Self.ciudad" Multiplicity="0..1" />
     <End Role="proveedor" Type="Self.proveedor" Multiplicity="*" />
     <ReferentialConstraint>
@@ -212,7 +213,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__empleado__codigo__07C12930">
+  <Association Name="FK__empleado__codigo__3B40CD36">
     <End Role="tipo_empleado" Type="Self.tipo_empleado" Multiplicity="0..1" />
     <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
     <ReferentialConstraint>
@@ -224,15 +225,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__garantia__id_ven__656C112C">
+  <Association Name="FK__garantia__codigo__339FAB6E">
     <End Role="venta" Type="Self.venta" Multiplicity="0..1" />
     <End Role="garantia" Type="Self.garantia" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="venta">
-        <PropertyRef Name="id_venta" />
+        <PropertyRef Name="codigo" />
       </Principal>
       <Dependent Role="garantia">
-        <PropertyRef Name="id_venta" />
+        <PropertyRef Name="codigo_venta" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -267,11 +268,11 @@
       <End Role="categoria" EntitySet="categoria" />
       <End Role="repuesto" EntitySet="repuesto" />
     </AssociationSet>
-    <AssociationSet Name="FK__ciudad__codigo_d__0F624AF8" Association="Self.FK__ciudad__codigo_d__0F624AF8">
+    <AssociationSet Name="FK__ciudad__codigo_d__2DE6D218" Association="Self.FK__ciudad__codigo_d__2DE6D218">
       <End Role="departamento" EntitySet="departamento" />
       <End Role="ciudad" EntitySet="ciudad" />
     </AssociationSet>
-    <AssociationSet Name="FK__proveedor__codig__10566F31" Association="Self.FK__proveedor__codig__10566F31">
+    <AssociationSet Name="FK__proveedor__codig__4D5F7D71" Association="Self.FK__proveedor__codig__4D5F7D71">
       <End Role="ciudad" EntitySet="ciudad" />
       <End Role="proveedor" EntitySet="proveedor" />
     </AssociationSet>
@@ -287,11 +288,11 @@
       <End Role="marca" EntitySet="marca" />
       <End Role="compatibilidad" EntitySet="compatibilidad" />
     </AssociationSet>
-    <AssociationSet Name="FK__empleado__codigo__07C12930" Association="Self.FK__empleado__codigo__07C12930">
+    <AssociationSet Name="FK__empleado__codigo__3B40CD36" Association="Self.FK__empleado__codigo__3B40CD36">
       <End Role="tipo_empleado" EntitySet="tipo_empleado" />
       <End Role="empleado" EntitySet="empleado" />
     </AssociationSet>
-    <AssociationSet Name="FK__garantia__id_ven__656C112C" Association="Self.FK__garantia__id_ven__656C112C">
+    <AssociationSet Name="FK__garantia__codigo__339FAB6E" Association="Self.FK__garantia__codigo__339FAB6E">
       <End Role="venta" EntitySet="venta" />
       <End Role="garantia" EntitySet="garantia" />
     </AssociationSet>
