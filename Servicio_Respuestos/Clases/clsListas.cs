@@ -11,6 +11,7 @@ namespace Servicio_Respuestos.Clases
         private DBTallerMotosEntities dbTaller = new DBTallerMotosEntities();
         public categoria categoriaRepuesto { get; set; }
         public ciudad ciudadProveedor { get; set; }
+        public departamento departamentoCiudad { get; set; }
         public List<categoria> ConsultarCategorias()
         {
             return dbTaller.categoria.OrderBy(c => c.nombre).ToList();
@@ -18,6 +19,10 @@ namespace Servicio_Respuestos.Clases
         public List<ciudad> ConsultarCiudades()
         {
             return dbTaller.ciudad.OrderBy(c => c.nombre).ToList();
+        }
+        public List<departamento> ConsultarDepartamentos()
+        {
+            return dbTaller.departamento.OrderBy(c => c.nombre).ToList();
         }
     }
 }

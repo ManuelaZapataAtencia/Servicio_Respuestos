@@ -19,5 +19,13 @@ namespace Servicio_Respuestos.Controllers
             clsListas _listas = new clsListas();
             return _listas.ConsultarCiudades();
         }
+
+        // POST api/<controller>
+        public string Post([FromBody] ciudad ciudad)
+        {
+            clsCiudad _ciudad = new clsCiudad();
+            _ciudad.ciudad = ciudad;
+            return _ciudad.Insertar();
+        }
     }
 }

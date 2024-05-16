@@ -19,5 +19,13 @@ namespace Servicio_Respuestos.Controllers
             clsListas _listas = new clsListas();
             return _listas.ConsultarCategorias();
         }
+
+        // POST api/<controller>
+        public string Post([FromBody] categoria categoria)
+        {
+            clsCategoria _categoria = new clsCategoria();
+            _categoria.categoria = categoria;
+            return _categoria.Insertar();
+        }
     }
 }
