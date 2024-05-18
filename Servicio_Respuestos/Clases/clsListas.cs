@@ -12,6 +12,7 @@ namespace Servicio_Respuestos.Clases
         public categoria categoriaRepuesto { get; set; }
         public ciudad ciudadProveedor { get; set; }
         public departamento departamentoCiudad { get; set; }
+
         public List<categoria> ConsultarCategorias()
         {
             return dbTaller.categoria.OrderBy(c => c.nombre).ToList();
