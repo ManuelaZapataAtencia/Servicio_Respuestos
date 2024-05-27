@@ -34,10 +34,12 @@ namespace Servicio_Respuestos.Models
         public DbSet<garantia> garantia { get; set; }
         public DbSet<marca> marca { get; set; }
         public DbSet<moto> moto { get; set; }
+        public DbSet<perfil> perfil { get; set; }
         public DbSet<proveedor> proveedor { get; set; }
         public DbSet<repuesto> repuesto { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public DbSet<tipo_empleado> tipo_empleado { get; set; }
+        public DbSet<usuario> usuario { get; set; }
+        public DbSet<usuario_perfil> usuario_perfil { get; set; }
         public DbSet<venta> venta { get; set; }
     }
 }

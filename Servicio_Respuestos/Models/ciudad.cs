@@ -23,7 +23,7 @@ namespace Servicio_Respuestos.Models
         public int codigo { get; set; }
         public string nombre { get; set; }
         public Nullable<int> codigo_departamento { get; set; }
-    
+        
         [JsonIgnore]
         public virtual departamento departamento { get; set; }
         [JsonIgnore]

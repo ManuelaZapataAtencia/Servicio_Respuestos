@@ -22,7 +22,6 @@ namespace Servicio_Respuestos.Models
     
         public string codigo { get; set; }
         public string nombre { get; set; }
-
         [JsonIgnore]
         public virtual ICollection<repuesto> repuesto { get; set; }
     }

@@ -86,6 +86,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="perfil">
+      <EntityTypeMapping TypeName="DBTallerMotosModel.perfil">
+        <MappingFragment StoreEntitySet="perfil">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="pagina_navegar" ColumnName="pagina_navegar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="proveedor">
       <EntityTypeMapping TypeName="DBTallerMotosModel.proveedor">
         <MappingFragment StoreEntitySet="proveedor">
@@ -119,11 +128,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tipo_empleado">
-      <EntityTypeMapping TypeName="DBTallerMotosModel.tipo_empleado">
-        <MappingFragment StoreEntitySet="tipo_empleado">
-          <ScalarProperty Name="codigo" ColumnName="codigo" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="DBTallerMotosModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="cedula_usuario" ColumnName="cedula_usuario" />
+          <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+          <ScalarProperty Name="clave" ColumnName="clave" />
+          <ScalarProperty Name="salt" ColumnName="salt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario_perfil">
+      <EntityTypeMapping TypeName="DBTallerMotosModel.usuario_perfil">
+        <MappingFragment StoreEntitySet="usuario_perfil">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_perfil" ColumnName="id_perfil" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

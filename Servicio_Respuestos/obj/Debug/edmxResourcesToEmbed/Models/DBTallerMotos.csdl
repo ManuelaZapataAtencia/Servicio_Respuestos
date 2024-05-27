@@ -58,7 +58,7 @@
     <Property Name="edad" Type="Int32" />
     <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="codigo_tipo" Type="Int32" />
-    <NavigationProperty Name="tipo_empleado" Relationship="Self.FK__empleado__codigo__3B40CD36" FromRole="empleado" ToRole="tipo_empleado" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK__usuario__cedula___756D6ECB" FromRole="empleado" ToRole="usuario" />
   </EntityType>
   <EntityType Name="garantia">
     <Key>
@@ -86,6 +86,15 @@
     <Property Name="modelo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Año" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="cliente" Relationship="Self.FK__cliente__id_moto__17F790F9" FromRole="moto" ToRole="cliente" />
+  </EntityType>
+  <EntityType Name="perfil">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pagina_navegar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="usuario_perfil" Relationship="Self.FK__usuario_p__id_pe__7E02B4CC" FromRole="perfil" ToRole="usuario_perfil" />
   </EntityType>
   <EntityType Name="proveedor">
     <Key>
@@ -121,13 +130,28 @@
     <Property Name="version" Type="Int32" />
     <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
-  <EntityType Name="tipo_empleado">
+  <EntityType Name="usuario">
     <Key>
-      <PropertyRef Name="codigo" />
+      <PropertyRef Name="id" />
     </Key>
-    <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="empleado" Relationship="Self.FK__empleado__codigo__3B40CD36" FromRole="tipo_empleado" ToRole="empleado" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cedula_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nombre_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="clave" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="salt" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="empleado" Relationship="Self.FK__usuario__cedula___756D6ECB" FromRole="usuario" ToRole="empleado" />
+    <NavigationProperty Name="usuario_perfil" Relationship="Self.FK__usuario_p__id_us__7D0E9093" FromRole="usuario" ToRole="usuario_perfil" />
+  </EntityType>
+  <EntityType Name="usuario_perfil">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="id_perfil" Type="Int32" />
+    <Property Name="activo" Type="Boolean" />
+    <NavigationProperty Name="perfil" Relationship="Self.FK__usuario_p__id_pe__7E02B4CC" FromRole="usuario_perfil" ToRole="perfil" />
+    <NavigationProperty Name="usuario" Relationship="Self.FK__usuario_p__id_us__7D0E9093" FromRole="usuario_perfil" ToRole="usuario" />
   </EntityType>
   <EntityType Name="venta">
     <Key>
@@ -213,15 +237,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__empleado__codigo__3B40CD36">
-    <End Role="tipo_empleado" Type="Self.tipo_empleado" Multiplicity="0..1" />
-    <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+  <Association Name="FK__usuario__cedula___756D6ECB">
+    <End Role="empleado" Type="Self.empleado" Multiplicity="0..1" />
+    <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="tipo_empleado">
-        <PropertyRef Name="codigo" />
+      <Principal Role="empleado">
+        <PropertyRef Name="cedula" />
       </Principal>
-      <Dependent Role="empleado">
-        <PropertyRef Name="codigo_tipo" />
+      <Dependent Role="usuario">
+        <PropertyRef Name="cedula_usuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -237,6 +261,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__usuario_p__id_pe__7E02B4CC">
+    <End Role="perfil" Type="Self.perfil" Multiplicity="0..1" />
+    <End Role="usuario_perfil" Type="Self.usuario_perfil" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="perfil">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="usuario_perfil">
+        <PropertyRef Name="id_perfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__venta__codigo_re__628FA481">
     <End Role="repuesto" Type="Self.repuesto" Multiplicity="0..1" />
     <End Role="venta" Type="Self.venta" Multiplicity="*" />
@@ -246,6 +282,18 @@
       </Principal>
       <Dependent Role="venta">
         <PropertyRef Name="codigo_repuesto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__usuario_p__id_us__7D0E9093">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="usuario_perfil" Type="Self.usuario_perfil" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="usuario_perfil">
+        <PropertyRef Name="id_usuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -259,10 +307,12 @@
     <EntitySet Name="garantia" EntityType="Self.garantia" />
     <EntitySet Name="marca" EntityType="Self.marca" />
     <EntitySet Name="moto" EntityType="Self.moto" />
+    <EntitySet Name="perfil" EntityType="Self.perfil" />
     <EntitySet Name="proveedor" EntityType="Self.proveedor" />
     <EntitySet Name="repuesto" EntityType="Self.repuesto" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-    <EntitySet Name="tipo_empleado" EntityType="Self.tipo_empleado" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <EntitySet Name="usuario_perfil" EntityType="Self.usuario_perfil" />
     <EntitySet Name="venta" EntityType="Self.venta" />
     <AssociationSet Name="FK__repuesto__codigo__02FC7413" Association="Self.FK__repuesto__codigo__02FC7413">
       <End Role="categoria" EntitySet="categoria" />
@@ -288,17 +338,25 @@
       <End Role="marca" EntitySet="marca" />
       <End Role="compatibilidad" EntitySet="compatibilidad" />
     </AssociationSet>
-    <AssociationSet Name="FK__empleado__codigo__3B40CD36" Association="Self.FK__empleado__codigo__3B40CD36">
-      <End Role="tipo_empleado" EntitySet="tipo_empleado" />
+    <AssociationSet Name="FK__usuario__cedula___756D6ECB" Association="Self.FK__usuario__cedula___756D6ECB">
       <End Role="empleado" EntitySet="empleado" />
+      <End Role="usuario" EntitySet="usuario" />
     </AssociationSet>
     <AssociationSet Name="FK__garantia__codigo__339FAB6E" Association="Self.FK__garantia__codigo__339FAB6E">
       <End Role="venta" EntitySet="venta" />
       <End Role="garantia" EntitySet="garantia" />
     </AssociationSet>
+    <AssociationSet Name="FK__usuario_p__id_pe__7E02B4CC" Association="Self.FK__usuario_p__id_pe__7E02B4CC">
+      <End Role="perfil" EntitySet="perfil" />
+      <End Role="usuario_perfil" EntitySet="usuario_perfil" />
+    </AssociationSet>
     <AssociationSet Name="FK__venta__codigo_re__628FA481" Association="Self.FK__venta__codigo_re__628FA481">
       <End Role="repuesto" EntitySet="repuesto" />
       <End Role="venta" EntitySet="venta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__usuario_p__id_us__7D0E9093" Association="Self.FK__usuario_p__id_us__7D0E9093">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="usuario_perfil" EntitySet="usuario_perfil" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

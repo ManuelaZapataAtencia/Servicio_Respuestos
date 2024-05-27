@@ -14,12 +14,17 @@ namespace Servicio_Respuestos.Models
     
     public partial class empleado
     {
+        public empleado()
+        {
+            this.usuario = new HashSet<usuario>();
+        }
+    
         public string cedula { get; set; }
         public string nombre { get; set; }
         public Nullable<int> edad { get; set; }
         public string correo { get; set; }
         public Nullable<int> codigo_tipo { get; set; }
     
-        public virtual tipo_empleado tipo_empleado { get; set; }
+        public virtual ICollection<usuario> usuario { get; set; }
     }
 }

@@ -9,7 +9,6 @@
 
 namespace Servicio_Respuestos.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -20,7 +19,7 @@ namespace Servicio_Respuestos.Models
         public string telefono { get; set; }
         public string correo { get; set; }
         public Nullable<int> codigo_ciudad { get; set; }
-        [JsonIgnore]
+    
         public virtual ciudad ciudad { get; set; }
     }
 }

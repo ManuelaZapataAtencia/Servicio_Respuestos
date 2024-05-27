@@ -87,6 +87,14 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.asociar' no tiene definida
           <Property Name="modelo" Type="varchar" MaxLength="20" />
           <Property Name="Año" Type="varchar" MaxLength="4" />
         </EntityType>
+        <EntityType Name="perfil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="pagina_navegar" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="proveedor">
           <Key>
             <PropertyRef Name="nit" />
@@ -125,12 +133,24 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.suministrar' no tiene defi
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="tipo_empleado">
+        <EntityType Name="usuario">
           <Key>
-            <PropertyRef Name="codigo" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tipo" Type="varchar" MaxLength="50" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula_usuario" Type="varchar" MaxLength="50" />
+          <Property Name="nombre_usuario" Type="varchar" MaxLength="50" />
+          <Property Name="clave" Type="varchar" MaxLength="2000" />
+          <Property Name="salt" Type="varchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="usuario_perfil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" />
+          <Property Name="id_perfil" Type="int" />
+          <Property Name="activo" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.vender' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
@@ -202,18 +222,6 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.asociar'
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__empleado__codigo__3B40CD36">
-          <End Role="tipo_empleado" Type="Self.tipo_empleado" Multiplicity="0..1" />
-          <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tipo_empleado">
-              <PropertyRef Name="codigo" />
-            </Principal>
-            <Dependent Role="empleado">
-              <PropertyRef Name="codigo_tipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__garantia__codigo__339FAB6E">
           <End Role="venta" Type="Self.venta" Multiplicity="0..1" />
           <End Role="garantia" Type="Self.garantia" Multiplicity="*" />
@@ -256,6 +264,42 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.suminist
         <!--Errores durante la generación:
 error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.suministrar', pero no se encuentra la tabla.
         <Association Name="FK__repuesto_pro__id__49C3F6B7" />-->
+        <Association Name="FK__usuario__cedula___756D6ECB">
+          <End Role="empleado" Type="Self.empleado" Multiplicity="0..1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleado">
+              <PropertyRef Name="cedula" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="cedula_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__usuario_p__id_pe__7E02B4CC">
+          <End Role="perfil" Type="Self.perfil" Multiplicity="0..1" />
+          <End Role="usuario_perfil" Type="Self.usuario_perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perfil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario_perfil">
+              <PropertyRef Name="id_perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__usuario_p__id_us__7D0E9093">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="usuario_perfil" Type="Self.usuario_perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario_perfil">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <!--Errores durante la generación:
 error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender', pero no se encuentra la tabla.
         <Association Name="FK__vender__cedula_e__3E1D39E1" />-->
@@ -284,10 +328,12 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           <EntitySet Name="garantia" EntityType="Self.garantia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="marca" EntityType="Self.marca" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="moto" EntityType="Self.moto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="perfil" EntityType="Self.perfil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="proveedor" EntityType="Self.proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="repuesto" EntityType="Self.repuesto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tipo_empleado" EntityType="Self.tipo_empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario_perfil" EntityType="Self.usuario_perfil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="venta" EntityType="Self.venta" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__ciudad__codigo_d__2DE6D218" Association="Self.FK__ciudad__codigo_d__2DE6D218">
             <End Role="departamento" EntitySet="departamento" />
@@ -305,10 +351,6 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             <End Role="marca" EntitySet="marca" />
             <End Role="compatibilidad" EntitySet="compatibilidad" />
           </AssociationSet>
-          <AssociationSet Name="FK__empleado__codigo__3B40CD36" Association="Self.FK__empleado__codigo__3B40CD36">
-            <End Role="tipo_empleado" EntitySet="tipo_empleado" />
-            <End Role="empleado" EntitySet="empleado" />
-          </AssociationSet>
           <AssociationSet Name="FK__garantia__codigo__339FAB6E" Association="Self.FK__garantia__codigo__339FAB6E">
             <End Role="venta" EntitySet="venta" />
             <End Role="garantia" EntitySet="garantia" />
@@ -320,6 +362,18 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           <AssociationSet Name="FK__repuesto__codigo__02FC7413" Association="Self.FK__repuesto__codigo__02FC7413">
             <End Role="categoria" EntitySet="categoria" />
             <End Role="repuesto" EntitySet="repuesto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__usuario__cedula___756D6ECB" Association="Self.FK__usuario__cedula___756D6ECB">
+            <End Role="empleado" EntitySet="empleado" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__usuario_p__id_pe__7E02B4CC" Association="Self.FK__usuario_p__id_pe__7E02B4CC">
+            <End Role="perfil" EntitySet="perfil" />
+            <End Role="usuario_perfil" EntitySet="usuario_perfil" />
+          </AssociationSet>
+          <AssociationSet Name="FK__usuario_p__id_us__7D0E9093" Association="Self.FK__usuario_p__id_us__7D0E9093">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_perfil" EntitySet="usuario_perfil" />
           </AssociationSet>
           <AssociationSet Name="FK__venta__codigo_re__628FA481" Association="Self.FK__venta__codigo_re__628FA481">
             <End Role="repuesto" EntitySet="repuesto" />
@@ -389,7 +443,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           <Property Name="edad" Type="Int32" />
           <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="codigo_tipo" Type="Int32" />
-          <NavigationProperty Name="tipo_empleado" Relationship="Self.FK__empleado__codigo__3B40CD36" FromRole="empleado" ToRole="tipo_empleado" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__usuario__cedula___756D6ECB" FromRole="empleado" ToRole="usuario" />
         </EntityType>
         <EntityType Name="garantia">
           <Key>
@@ -417,6 +471,15 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           <Property Name="modelo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Año" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="cliente" Relationship="Self.FK__cliente__id_moto__17F790F9" FromRole="moto" ToRole="cliente" />
+        </EntityType>
+        <EntityType Name="perfil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pagina_navegar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuario_perfil" Relationship="Self.FK__usuario_p__id_pe__7E02B4CC" FromRole="perfil" ToRole="usuario_perfil" />
         </EntityType>
         <EntityType Name="proveedor">
           <Key>
@@ -452,13 +515,28 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="tipo_empleado">
+        <EntityType Name="usuario">
           <Key>
-            <PropertyRef Name="codigo" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="empleado" Relationship="Self.FK__empleado__codigo__3B40CD36" FromRole="tipo_empleado" ToRole="empleado" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="salt" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empleado" Relationship="Self.FK__usuario__cedula___756D6ECB" FromRole="usuario" ToRole="empleado" />
+          <NavigationProperty Name="usuario_perfil" Relationship="Self.FK__usuario_p__id_us__7D0E9093" FromRole="usuario" ToRole="usuario_perfil" />
+        </EntityType>
+        <EntityType Name="usuario_perfil">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" />
+          <Property Name="id_perfil" Type="Int32" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="perfil" Relationship="Self.FK__usuario_p__id_pe__7E02B4CC" FromRole="usuario_perfil" ToRole="perfil" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__usuario_p__id_us__7D0E9093" FromRole="usuario_perfil" ToRole="usuario" />
         </EntityType>
         <EntityType Name="venta">
           <Key>
@@ -544,15 +622,15 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__empleado__codigo__3B40CD36">
-          <End Role="tipo_empleado" Type="Self.tipo_empleado" Multiplicity="0..1" />
-          <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+        <Association Name="FK__usuario__cedula___756D6ECB">
+          <End Role="empleado" Type="Self.empleado" Multiplicity="0..1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tipo_empleado">
-              <PropertyRef Name="codigo" />
+            <Principal Role="empleado">
+              <PropertyRef Name="cedula" />
             </Principal>
-            <Dependent Role="empleado">
-              <PropertyRef Name="codigo_tipo" />
+            <Dependent Role="usuario">
+              <PropertyRef Name="cedula_usuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -568,6 +646,18 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__usuario_p__id_pe__7E02B4CC">
+          <End Role="perfil" Type="Self.perfil" Multiplicity="0..1" />
+          <End Role="usuario_perfil" Type="Self.usuario_perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="perfil">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario_perfil">
+              <PropertyRef Name="id_perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__venta__codigo_re__628FA481">
           <End Role="repuesto" Type="Self.repuesto" Multiplicity="0..1" />
           <End Role="venta" Type="Self.venta" Multiplicity="*" />
@@ -577,6 +667,18 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             </Principal>
             <Dependent Role="venta">
               <PropertyRef Name="codigo_repuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__usuario_p__id_us__7D0E9093">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="usuario_perfil" Type="Self.usuario_perfil" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario_perfil">
+              <PropertyRef Name="id_usuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -590,10 +692,12 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           <EntitySet Name="garantia" EntityType="Self.garantia" />
           <EntitySet Name="marca" EntityType="Self.marca" />
           <EntitySet Name="moto" EntityType="Self.moto" />
+          <EntitySet Name="perfil" EntityType="Self.perfil" />
           <EntitySet Name="proveedor" EntityType="Self.proveedor" />
           <EntitySet Name="repuesto" EntityType="Self.repuesto" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="tipo_empleado" EntityType="Self.tipo_empleado" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <EntitySet Name="usuario_perfil" EntityType="Self.usuario_perfil" />
           <EntitySet Name="venta" EntityType="Self.venta" />
           <AssociationSet Name="FK__repuesto__codigo__02FC7413" Association="Self.FK__repuesto__codigo__02FC7413">
             <End Role="categoria" EntitySet="categoria" />
@@ -619,17 +723,25 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             <End Role="marca" EntitySet="marca" />
             <End Role="compatibilidad" EntitySet="compatibilidad" />
           </AssociationSet>
-          <AssociationSet Name="FK__empleado__codigo__3B40CD36" Association="Self.FK__empleado__codigo__3B40CD36">
-            <End Role="tipo_empleado" EntitySet="tipo_empleado" />
+          <AssociationSet Name="FK__usuario__cedula___756D6ECB" Association="Self.FK__usuario__cedula___756D6ECB">
             <End Role="empleado" EntitySet="empleado" />
+            <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
           <AssociationSet Name="FK__garantia__codigo__339FAB6E" Association="Self.FK__garantia__codigo__339FAB6E">
             <End Role="venta" EntitySet="venta" />
             <End Role="garantia" EntitySet="garantia" />
           </AssociationSet>
+          <AssociationSet Name="FK__usuario_p__id_pe__7E02B4CC" Association="Self.FK__usuario_p__id_pe__7E02B4CC">
+            <End Role="perfil" EntitySet="perfil" />
+            <End Role="usuario_perfil" EntitySet="usuario_perfil" />
+          </AssociationSet>
           <AssociationSet Name="FK__venta__codigo_re__628FA481" Association="Self.FK__venta__codigo_re__628FA481">
             <End Role="repuesto" EntitySet="repuesto" />
             <End Role="venta" EntitySet="venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__usuario_p__id_us__7D0E9093" Association="Self.FK__usuario_p__id_us__7D0E9093">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="usuario_perfil" EntitySet="usuario_perfil" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -723,6 +835,15 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="perfil">
+            <EntityTypeMapping TypeName="DBTallerMotosModel.perfil">
+              <MappingFragment StoreEntitySet="perfil">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="pagina_navegar" ColumnName="pagina_navegar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="proveedor">
             <EntityTypeMapping TypeName="DBTallerMotosModel.proveedor">
               <MappingFragment StoreEntitySet="proveedor">
@@ -756,11 +877,24 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tipo_empleado">
-            <EntityTypeMapping TypeName="DBTallerMotosModel.tipo_empleado">
-              <MappingFragment StoreEntitySet="tipo_empleado">
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="DBTallerMotosModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cedula_usuario" ColumnName="cedula_usuario" />
+                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="salt" ColumnName="salt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario_perfil">
+            <EntityTypeMapping TypeName="DBTallerMotosModel.usuario_perfil">
+              <MappingFragment StoreEntitySet="usuario_perfil">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_perfil" ColumnName="id_perfil" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
