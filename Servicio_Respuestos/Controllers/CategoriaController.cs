@@ -6,11 +6,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using System.Web.Mvc;
 
 namespace Servicio_Respuestos.Controllers
 {
     [EnableCors(origins: "http://localhost:53331", headers: "*", methods: "*")]
+    [RoutePrefix("api/Categoria")]
+    
     public class CategoriaController : ApiController
     {
         // GET api/<controller>
@@ -26,6 +27,14 @@ namespace Servicio_Respuestos.Controllers
             clsCategoria _categoria = new clsCategoria();
             _categoria.categoria = categoria;
             return _categoria.Insertar();
+        }
+
+        [HttpGet]
+        [Route("LlenarCombo")]
+        public IQueryable LlenarCombo()
+        {
+            clsCategoria _categoria = new clsCategoria();
+            return _categoria.LlenarCombo();
         }
     }
 }

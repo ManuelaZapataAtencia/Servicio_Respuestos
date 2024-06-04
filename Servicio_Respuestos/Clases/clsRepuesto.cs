@@ -57,15 +57,19 @@ namespace Servicio_Respuestos.Clases
         }
         
         // consulta especifica
-        public repuesto Consultar(string codigo)
+        public repuesto Consultar(int codigo)
         {
             return dbTaller.repuesto.FirstOrDefault(e => e.codigo == codigo);
         }
 
-        // consulta general
-        public List<repuesto> ConsultarTodos()
+        public IQueryable LlenarCombo()
         {
-            return dbTaller.repuesto.ToList();
+            return from r in dbTaller.Set<repuesto>()
+                   select new
+                   {
+                       Codigo = r.codigo + "|" + r.valor_unitario,
+                       Nombre = r.nombre
+                   };
         }
 
         // Metodo que listara los repuestos en la lista desplegable
@@ -86,7 +90,7 @@ namespace Servicio_Respuestos.Clases
                        Nombre = r.nombre,
                        Descripcion = r.descripcion,
                        Categoria = c.nombre,
-                       Precio = r.precio,
+                       Precio = r.valor_unitario,
                    };
         }
     }

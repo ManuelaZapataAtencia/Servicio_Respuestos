@@ -9,6 +9,7 @@
 
 namespace Servicio_Respuestos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -22,6 +23,7 @@ namespace Servicio_Respuestos.Models
         public string id_marca { get; set; }
         public string nombre { get; set; }
     
+        [JsonIgnore]
         public virtual ICollection<compatibilidad> compatibilidad { get; set; }
     }
 }

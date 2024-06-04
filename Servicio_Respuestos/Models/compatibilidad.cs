@@ -9,17 +9,20 @@
 
 namespace Servicio_Respuestos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
     public partial class compatibilidad
     {
-        public string id_compatibilidad { get; set; }
-        public string codigo_repuesto { get; set; }
+        public int id_compatibilidad { get; set; }
+        public Nullable<int> codigo_repuesto { get; set; }
         public string id_marca { get; set; }
         public Nullable<int> cantidad_requerida { get; set; }
-    
+        
+        [JsonIgnore]
         public virtual repuesto repuesto { get; set; }
+        [JsonIgnore]
         public virtual marca marca { get; set; }
     }
 }

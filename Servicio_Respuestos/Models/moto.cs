@@ -9,6 +9,7 @@
 
 namespace Servicio_Respuestos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -24,6 +25,7 @@ namespace Servicio_Respuestos.Models
         public string modelo { get; set; }
         public string Año { get; set; }
     
+        [JsonIgnore]
         public virtual ICollection<cliente> cliente { get; set; }
     }
 }

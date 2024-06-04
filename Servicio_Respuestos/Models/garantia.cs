@@ -9,15 +9,17 @@
 
 namespace Servicio_Respuestos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
     public partial class garantia
     {
-        public int codigo { get; set; }
+        public int codigo_garantia { get; set; }
         public Nullable<int> codigo_venta { get; set; }
         public Nullable<int> duracion { get; set; }
     
+        [JsonIgnore]
         public virtual venta venta { get; set; }
     }
 }

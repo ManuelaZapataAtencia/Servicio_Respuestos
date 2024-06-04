@@ -9,6 +9,7 @@
 
 namespace Servicio_Respuestos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -20,12 +21,15 @@ namespace Servicio_Respuestos.Models
         }
     
         public int codigo { get; set; }
+        public string nombre_cliente { get; set; }
         public Nullable<System.DateTime> fecha_venta { get; set; }
-        public string codigo_repuesto { get; set; }
+        public Nullable<int> codigo_repuesto { get; set; }
         public Nullable<int> cantidad { get; set; }
-        public Nullable<decimal> precio_total { get; set; }
+        public Nullable<decimal> valor_total { get; set; }
     
+        [JsonIgnore]
         public virtual ICollection<garantia> garantia { get; set; }
+        [JsonIgnore]
         public virtual repuesto repuesto { get; set; }
     }
 }

@@ -26,5 +26,15 @@ namespace Servicio_Respuestos.Clases
                 return ex.Message;
             }
         }
+
+        public IQueryable LlenarCombo()
+        {
+            return from c in dbTaller.Set<categoria>()
+                   select new
+                   {
+                       Codigo = c.codigo,
+                       Nombre = c.nombre
+                   };
+        }
     }
 }

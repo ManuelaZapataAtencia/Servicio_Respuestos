@@ -14,16 +14,21 @@ namespace Servicio_Respuestos.Clases
         private DBTallerMotosEntities dbTaller = new DBTallerMotosEntities();
         public venta venta { get; set; }
 
-        public void CalcularPrecioTotal()
+        private void CalcularPrecioTotal()
         {
             var precioProducto = dbTaller.repuesto
                 .Where(r => r.codigo.Equals(venta.codigo_repuesto))
-                .Select(r => r.precio)
+                .Select(r => r.valor_unitario)
                 .FirstOrDefault();
             if (precioProducto != null)
             {
-                venta.precio_total = (decimal?)(venta.cantidad * Convert.ToDouble(precioProducto));
+                venta.valor_total = (decimal?)(venta.cantidad * Convert.ToDouble(precioProducto));
             }
+        }
+
+        private int CalcularNumeroFactura()
+        {
+            return dbTaller.venta.Select(f => f.codigo).DefaultIfEmpty(0).Count() + 1;
         }
 
         //Método insertar
@@ -31,25 +36,12 @@ namespace Servicio_Respuestos.Clases
         {
             try
             {
-                CalcularPrecioTotal();
+                //venta.codigo = CalcularNumeroFactura();
+                venta.fecha_venta = DateTime.Today;
+                //CalcularPrecioTotal();
                 dbTaller.venta.Add(venta);
                 dbTaller.SaveChanges();
-                return "Se ha insertado una nueva venta";
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
-        }
-        // Metodo actualizar
-        public string Actualizar()
-        {
-            try
-            {
-                CalcularPrecioTotal();
-                dbTaller.venta.AddOrUpdate(venta);
-                dbTaller.SaveChanges();
-                return "Se ha actualizado la venta";
+                return "Se ha agregado un nuevo producto al carro";
             }
             catch (Exception ex)
             {
@@ -57,19 +49,12 @@ namespace Servicio_Respuestos.Clases
             }
         }
         // Metodo eliminar
-        public string Eliminar()
+        public string Eliminar(int CodigoVenta)
         {
-            try
-            {
-                venta _venta = Consultar(venta.codigo);
-                dbTaller.venta.Remove(_venta);
-                dbTaller.SaveChanges();
-                return "se ha eliminado la venta";
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            venta venta = dbTaller.venta.FirstOrDefault(d => d.codigo == CodigoVenta);
+            dbTaller.venta.Remove(venta);
+            dbTaller.SaveChanges();
+            return "Se eliminó el detalle de venta";
         }
 
         // consulta especifica
@@ -78,26 +63,25 @@ namespace Servicio_Respuestos.Clases
             return dbTaller.venta.FirstOrDefault(e => e.codigo == id_venta);
         }
 
-        // consulta general
-        public List<venta> ConsultarTodos()
+        public IQueryable ListarProductoVender(int CodigoVenta)
         {
-            return dbTaller.venta.ToList();
-        }
-
-        public IQueryable ListarTodosConRepuesto()
-        {
-            return from r in dbTaller.Set<repuesto>()
+            return from c in dbTaller.Set<categoria>() 
+                   join r in dbTaller.Set<repuesto>()
+                   on c.codigo equals r.codigo
                    join v in dbTaller.Set<venta>()
                    on r.codigo equals v.codigo_repuesto
-                   orderby r.nombre
+                   where v.codigo == CodigoVenta
                    select new
                    {
+                       Eliminar = "<button type=\"button\" id=\"btnEliminar\" class=\"btn-block btn-sm btn-danger\" " +
+                                "onclick=\"Eliminar(" + v.codigo + ")\">ELIMINAR</button>",
                        Codigo = v.codigo,
                        Fecha = v.fecha_venta,
+                       Categoria = c.nombre,
                        Repuesto = r.nombre,
-                       Precio = r.precio,
+                       Precio = r.valor_unitario,
                        Cantidad = v.cantidad,
-                       Total = v.precio_total
+                       Total = v.valor_total
                    };
         }
     }

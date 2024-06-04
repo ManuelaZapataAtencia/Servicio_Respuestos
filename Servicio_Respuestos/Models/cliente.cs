@@ -9,6 +9,7 @@
 
 namespace Servicio_Respuestos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -20,7 +21,8 @@ namespace Servicio_Respuestos.Models
         public string correo { get; set; }
         public string telefono { get; set; }
         public string id_moto { get; set; }
-    
+        
+        [JsonIgnore]
         public virtual moto moto { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Servicio_Respuestos.Models
             this.repuesto = new HashSet<repuesto>();
         }
     
-        public string codigo { get; set; }
+        public int codigo { get; set; }
         public string nombre { get; set; }
         [JsonIgnore]
         public virtual ICollection<repuesto> repuesto { get; set; }

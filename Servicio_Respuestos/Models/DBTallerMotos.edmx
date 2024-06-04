@@ -15,7 +15,7 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.asociar' no tiene definida
           <Key>
             <PropertyRef Name="codigo" />
           </Key>
-          <Property Name="codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ciudad">
@@ -41,8 +41,8 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.asociar' no tiene definida
           <Key>
             <PropertyRef Name="id_compatibilidad" />
           </Key>
-          <Property Name="id_compatibilidad" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="codigo_repuesto" Type="varchar" MaxLength="50" />
+          <Property Name="id_compatibilidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo_repuesto" Type="int" />
           <Property Name="id_marca" Type="varchar" MaxLength="20" />
           <Property Name="cantidad_requerida" Type="int" />
         </EntityType>
@@ -61,13 +61,12 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.asociar' no tiene definida
           <Property Name="nombre" Type="varchar" MaxLength="50" />
           <Property Name="edad" Type="int" />
           <Property Name="correo" Type="varchar" MaxLength="50" />
-          <Property Name="codigo_tipo" Type="int" />
         </EntityType>
         <EntityType Name="garantia">
           <Key>
-            <PropertyRef Name="codigo" />
+            <PropertyRef Name="codigo_garantia" />
           </Key>
-          <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo_garantia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="codigo_venta" Type="int" />
           <Property Name="duracion" Type="int" />
         </EntityType>
@@ -109,19 +108,19 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.asociar' no tiene definida
           <Key>
             <PropertyRef Name="codigo" />
           </Key>
-          <Property Name="codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="codigo" Type="int" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="codigo_categoria" Type="int" />
           <Property Name="descripcion" Type="text" />
-          <Property Name="precio" Type="money" />
-          <Property Name="codigo_categoria" Type="varchar" MaxLength="50" />
+          <Property Name="valor_unitario" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.suministrar' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
         <EntityType Name="suministrar">
-          <Property Name="codigo" Type="varchar" MaxLength="50" />
           <Property Name="nit_proveedor" Type="varchar" MaxLength="50" />
           <Property Name="detalle_suministro" Type="varchar" MaxLength="50" />
           <Property Name="cantidad_suministro" Type="int" />
+          <Property Name="codigo" Type="int" />
         </EntityType>-->
         <EntityType Name="sysdiagrams">
           <Key>
@@ -155,18 +154,19 @@ advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.suministrar' no tiene defi
         <!--Errores durante la generación:
 advertencia 6013: La tabla o vista 'DBTallerMotos.dbo.vender' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
         <EntityType Name="vender">
-          <Property Name="codigo_repuesto" Type="varchar" MaxLength="50" />
+          <Property Name="codigo_repuesto" Type="int" />
           <Property Name="cedula_empleado" Type="varchar" MaxLength="50" />
         </EntityType>-->
         <EntityType Name="venta">
           <Key>
             <PropertyRef Name="codigo" />
           </Key>
-          <Property Name="codigo" Type="int" Nullable="false" />
+          <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_cliente" Type="varchar" MaxLength="50" />
           <Property Name="fecha_venta" Type="date" />
-          <Property Name="codigo_repuesto" Type="varchar" MaxLength="50" />
+          <Property Name="codigo_repuesto" Type="int" />
           <Property Name="cantidad" Type="int" />
-          <Property Name="precio_total" Type="money" />
+          <Property Name="valor_total" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
 error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.asociar', pero no se encuentra la tabla.
@@ -198,7 +198,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.asociar'
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__compatibi__codig__1F98B2C1">
+        <Association Name="FK__compatibi__codig__10216507">
           <End Role="repuesto" Type="Self.repuesto" Multiplicity="0..1" />
           <End Role="compatibilidad" Type="Self.compatibilidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -210,7 +210,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.asociar'
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__compatibi__id_ma__208CD6FA">
+        <Association Name="FK__compatibi__id_ma__11158940">
           <End Role="marca" Type="Self.marca" Multiplicity="0..1" />
           <End Role="compatibilidad" Type="Self.compatibilidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -222,7 +222,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.asociar'
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__garantia__codigo__339FAB6E">
+        <Association Name="FK__garantia__codigo__2057CCD0">
           <End Role="venta" Type="Self.venta" Multiplicity="0..1" />
           <End Role="garantia" Type="Self.garantia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -246,10 +246,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.asociar'
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.suministrar', pero no se encuentra la tabla.
-        <Association Name="FK__repuesto___codig__48CFD27E" />-->
-        <Association Name="FK__repuesto__codigo__02FC7413">
+        <Association Name="FK__repuesto__codigo__0A688BB1">
           <End Role="categoria" Type="Self.categoria" Multiplicity="0..1" />
           <End Role="repuesto" Type="Self.repuesto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -264,6 +261,9 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.suminist
         <!--Errores durante la generación:
 error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.suministrar', pero no se encuentra la tabla.
         <Association Name="FK__repuesto_pro__id__49C3F6B7" />-->
+        <!--Errores durante la generación:
+error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.suministrar', pero no se encuentra la tabla.
+        <Association Name="FK__suministr__codig__22401542" />-->
         <Association Name="FK__usuario__cedula___756D6ECB">
           <End Role="empleado" Type="Self.empleado" Multiplicity="0..1" />
           <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
@@ -302,11 +302,11 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.suminist
         </Association>
         <!--Errores durante la generación:
 error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender', pero no se encuentra la tabla.
-        <Association Name="FK__vender__cedula_e__3E1D39E1" />-->
+        <Association Name="FK__vender__cedula_e__0D44F85C" />-->
         <!--Errores durante la generación:
 error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender', pero no se encuentra la tabla.
-        <Association Name="FK__vender__codigo_r__3D2915A8" />-->
-        <Association Name="FK__venta__codigo_re__628FA481">
+        <Association Name="FK__vender__codigo_r__0C50D423" />-->
+        <Association Name="FK__venta__codigo_re__1D7B6025">
           <End Role="repuesto" Type="Self.repuesto" Multiplicity="0..1" />
           <End Role="venta" Type="Self.venta" Multiplicity="*" />
           <ReferentialConstraint>
@@ -343,15 +343,15 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             <End Role="moto" EntitySet="moto" />
             <End Role="cliente" EntitySet="cliente" />
           </AssociationSet>
-          <AssociationSet Name="FK__compatibi__codig__1F98B2C1" Association="Self.FK__compatibi__codig__1F98B2C1">
+          <AssociationSet Name="FK__compatibi__codig__10216507" Association="Self.FK__compatibi__codig__10216507">
             <End Role="repuesto" EntitySet="repuesto" />
             <End Role="compatibilidad" EntitySet="compatibilidad" />
           </AssociationSet>
-          <AssociationSet Name="FK__compatibi__id_ma__208CD6FA" Association="Self.FK__compatibi__id_ma__208CD6FA">
+          <AssociationSet Name="FK__compatibi__id_ma__11158940" Association="Self.FK__compatibi__id_ma__11158940">
             <End Role="marca" EntitySet="marca" />
             <End Role="compatibilidad" EntitySet="compatibilidad" />
           </AssociationSet>
-          <AssociationSet Name="FK__garantia__codigo__339FAB6E" Association="Self.FK__garantia__codigo__339FAB6E">
+          <AssociationSet Name="FK__garantia__codigo__2057CCD0" Association="Self.FK__garantia__codigo__2057CCD0">
             <End Role="venta" EntitySet="venta" />
             <End Role="garantia" EntitySet="garantia" />
           </AssociationSet>
@@ -359,7 +359,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             <End Role="ciudad" EntitySet="ciudad" />
             <End Role="proveedor" EntitySet="proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FK__repuesto__codigo__02FC7413" Association="Self.FK__repuesto__codigo__02FC7413">
+          <AssociationSet Name="FK__repuesto__codigo__0A688BB1" Association="Self.FK__repuesto__codigo__0A688BB1">
             <End Role="categoria" EntitySet="categoria" />
             <End Role="repuesto" EntitySet="repuesto" />
           </AssociationSet>
@@ -375,7 +375,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             <End Role="usuario" EntitySet="usuario" />
             <End Role="usuario_perfil" EntitySet="usuario_perfil" />
           </AssociationSet>
-          <AssociationSet Name="FK__venta__codigo_re__628FA481" Association="Self.FK__venta__codigo_re__628FA481">
+          <AssociationSet Name="FK__venta__codigo_re__1D7B6025" Association="Self.FK__venta__codigo_re__1D7B6025">
             <End Role="repuesto" EntitySet="repuesto" />
             <End Role="venta" EntitySet="venta" />
           </AssociationSet>
@@ -389,9 +389,9 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           <Key>
             <PropertyRef Name="codigo" />
           </Key>
-          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="repuesto" Relationship="Self.FK__repuesto__codigo__02FC7413" FromRole="categoria" ToRole="repuesto" />
+          <NavigationProperty Name="repuesto" Relationship="Self.FK__repuesto__codigo__0A688BB1" FromRole="categoria" ToRole="repuesto" />
         </EntityType>
         <EntityType Name="ciudad">
           <Key>
@@ -419,12 +419,12 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           <Key>
             <PropertyRef Name="id_compatibilidad" />
           </Key>
-          <Property Name="id_compatibilidad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="codigo_repuesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_compatibilidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo_repuesto" Type="Int32" />
           <Property Name="id_marca" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="cantidad_requerida" Type="Int32" />
-          <NavigationProperty Name="repuesto" Relationship="Self.FK__compatibi__codig__1F98B2C1" FromRole="compatibilidad" ToRole="repuesto" />
-          <NavigationProperty Name="marca" Relationship="Self.FK__compatibi__id_ma__208CD6FA" FromRole="compatibilidad" ToRole="marca" />
+          <NavigationProperty Name="repuesto" Relationship="Self.FK__compatibi__codig__10216507" FromRole="compatibilidad" ToRole="repuesto" />
+          <NavigationProperty Name="marca" Relationship="Self.FK__compatibi__id_ma__11158940" FromRole="compatibilidad" ToRole="marca" />
         </EntityType>
         <EntityType Name="departamento">
           <Key>
@@ -442,17 +442,16 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="edad" Type="Int32" />
           <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="codigo_tipo" Type="Int32" />
           <NavigationProperty Name="usuario" Relationship="Self.FK__usuario__cedula___756D6ECB" FromRole="empleado" ToRole="usuario" />
         </EntityType>
         <EntityType Name="garantia">
           <Key>
-            <PropertyRef Name="codigo" />
+            <PropertyRef Name="codigo_garantia" />
           </Key>
-          <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo_garantia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="codigo_venta" Type="Int32" />
           <Property Name="duracion" Type="Int32" />
-          <NavigationProperty Name="venta" Relationship="Self.FK__garantia__codigo__339FAB6E" FromRole="garantia" ToRole="venta" />
+          <NavigationProperty Name="venta" Relationship="Self.FK__garantia__codigo__2057CCD0" FromRole="garantia" ToRole="venta" />
         </EntityType>
         <EntityType Name="marca">
           <Key>
@@ -460,7 +459,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           </Key>
           <Property Name="id_marca" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="compatibilidad" Relationship="Self.FK__compatibi__id_ma__208CD6FA" FromRole="marca" ToRole="compatibilidad" />
+          <NavigationProperty Name="compatibilidad" Relationship="Self.FK__compatibi__id_ma__11158940" FromRole="marca" ToRole="compatibilidad" />
         </EntityType>
         <EntityType Name="moto">
           <Key>
@@ -496,14 +495,14 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           <Key>
             <PropertyRef Name="codigo" />
           </Key>
-          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codigo" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo_categoria" Type="Int32" />
           <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="precio" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="codigo_categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="categoria" Relationship="Self.FK__repuesto__codigo__02FC7413" FromRole="repuesto" ToRole="categoria" />
-          <NavigationProperty Name="compatibilidad" Relationship="Self.FK__compatibi__codig__1F98B2C1" FromRole="repuesto" ToRole="compatibilidad" />
-          <NavigationProperty Name="venta" Relationship="Self.FK__venta__codigo_re__628FA481" FromRole="repuesto" ToRole="venta" />
+          <Property Name="valor_unitario" Type="Int32" />
+          <NavigationProperty Name="categoria" Relationship="Self.FK__repuesto__codigo__0A688BB1" FromRole="repuesto" ToRole="categoria" />
+          <NavigationProperty Name="compatibilidad" Relationship="Self.FK__compatibi__codig__10216507" FromRole="repuesto" ToRole="compatibilidad" />
+          <NavigationProperty Name="venta" Relationship="Self.FK__venta__codigo_re__1D7B6025" FromRole="repuesto" ToRole="venta" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -542,15 +541,16 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           <Key>
             <PropertyRef Name="codigo" />
           </Key>
-          <Property Name="codigo" Type="Int32" Nullable="false" />
+          <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="fecha_venta" Type="DateTime" Precision="0" />
-          <Property Name="codigo_repuesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo_repuesto" Type="Int32" />
           <Property Name="cantidad" Type="Int32" />
-          <Property Name="precio_total" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="garantia" Relationship="Self.FK__garantia__codigo__339FAB6E" FromRole="venta" ToRole="garantia" />
-          <NavigationProperty Name="repuesto" Relationship="Self.FK__venta__codigo_re__628FA481" FromRole="venta" ToRole="repuesto" />
+          <Property Name="valor_total" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="garantia" Relationship="Self.FK__garantia__codigo__2057CCD0" FromRole="venta" ToRole="garantia" />
+          <NavigationProperty Name="repuesto" Relationship="Self.FK__venta__codigo_re__1D7B6025" FromRole="venta" ToRole="repuesto" />
         </EntityType>
-        <Association Name="FK__repuesto__codigo__02FC7413">
+        <Association Name="FK__repuesto__codigo__0A688BB1">
           <End Role="categoria" Type="Self.categoria" Multiplicity="0..1" />
           <End Role="repuesto" Type="Self.repuesto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -598,7 +598,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__compatibi__codig__1F98B2C1">
+        <Association Name="FK__compatibi__codig__10216507">
           <End Role="repuesto" Type="Self.repuesto" Multiplicity="0..1" />
           <End Role="compatibilidad" Type="Self.compatibilidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -610,7 +610,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__compatibi__id_ma__208CD6FA">
+        <Association Name="FK__compatibi__id_ma__11158940">
           <End Role="marca" Type="Self.marca" Multiplicity="0..1" />
           <End Role="compatibilidad" Type="Self.compatibilidad" Multiplicity="*" />
           <ReferentialConstraint>
@@ -634,7 +634,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__garantia__codigo__339FAB6E">
+        <Association Name="FK__garantia__codigo__2057CCD0">
           <End Role="venta" Type="Self.venta" Multiplicity="0..1" />
           <End Role="garantia" Type="Self.garantia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -658,7 +658,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__venta__codigo_re__628FA481">
+        <Association Name="FK__venta__codigo_re__1D7B6025">
           <End Role="repuesto" Type="Self.repuesto" Multiplicity="0..1" />
           <End Role="venta" Type="Self.venta" Multiplicity="*" />
           <ReferentialConstraint>
@@ -699,7 +699,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
           <EntitySet Name="usuario" EntityType="Self.usuario" />
           <EntitySet Name="usuario_perfil" EntityType="Self.usuario_perfil" />
           <EntitySet Name="venta" EntityType="Self.venta" />
-          <AssociationSet Name="FK__repuesto__codigo__02FC7413" Association="Self.FK__repuesto__codigo__02FC7413">
+          <AssociationSet Name="FK__repuesto__codigo__0A688BB1" Association="Self.FK__repuesto__codigo__0A688BB1">
             <End Role="categoria" EntitySet="categoria" />
             <End Role="repuesto" EntitySet="repuesto" />
           </AssociationSet>
@@ -715,11 +715,11 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             <End Role="moto" EntitySet="moto" />
             <End Role="cliente" EntitySet="cliente" />
           </AssociationSet>
-          <AssociationSet Name="FK__compatibi__codig__1F98B2C1" Association="Self.FK__compatibi__codig__1F98B2C1">
+          <AssociationSet Name="FK__compatibi__codig__10216507" Association="Self.FK__compatibi__codig__10216507">
             <End Role="repuesto" EntitySet="repuesto" />
             <End Role="compatibilidad" EntitySet="compatibilidad" />
           </AssociationSet>
-          <AssociationSet Name="FK__compatibi__id_ma__208CD6FA" Association="Self.FK__compatibi__id_ma__208CD6FA">
+          <AssociationSet Name="FK__compatibi__id_ma__11158940" Association="Self.FK__compatibi__id_ma__11158940">
             <End Role="marca" EntitySet="marca" />
             <End Role="compatibilidad" EntitySet="compatibilidad" />
           </AssociationSet>
@@ -727,7 +727,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             <End Role="empleado" EntitySet="empleado" />
             <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
-          <AssociationSet Name="FK__garantia__codigo__339FAB6E" Association="Self.FK__garantia__codigo__339FAB6E">
+          <AssociationSet Name="FK__garantia__codigo__2057CCD0" Association="Self.FK__garantia__codigo__2057CCD0">
             <End Role="venta" EntitySet="venta" />
             <End Role="garantia" EntitySet="garantia" />
           </AssociationSet>
@@ -735,7 +735,7 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             <End Role="perfil" EntitySet="perfil" />
             <End Role="usuario_perfil" EntitySet="usuario_perfil" />
           </AssociationSet>
-          <AssociationSet Name="FK__venta__codigo_re__628FA481" Association="Self.FK__venta__codigo_re__628FA481">
+          <AssociationSet Name="FK__venta__codigo_re__1D7B6025" Association="Self.FK__venta__codigo_re__1D7B6025">
             <End Role="repuesto" EntitySet="repuesto" />
             <End Role="venta" EntitySet="venta" />
           </AssociationSet>
@@ -804,14 +804,13 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="edad" ColumnName="edad" />
                 <ScalarProperty Name="correo" ColumnName="correo" />
-                <ScalarProperty Name="codigo_tipo" ColumnName="codigo_tipo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="garantia">
             <EntityTypeMapping TypeName="DBTallerMotosModel.garantia">
               <MappingFragment StoreEntitySet="garantia">
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="codigo_garantia" ColumnName="codigo_garantia" />
                 <ScalarProperty Name="codigo_venta" ColumnName="codigo_venta" />
                 <ScalarProperty Name="duracion" ColumnName="duracion" />
               </MappingFragment>
@@ -860,9 +859,9 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
               <MappingFragment StoreEntitySet="repuesto">
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="precio" ColumnName="precio" />
                 <ScalarProperty Name="codigo_categoria" ColumnName="codigo_categoria" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="valor_unitario" ColumnName="valor_unitario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -902,10 +901,11 @@ error 6004: Una relación hace referencia a la tabla 'DBTallerMotos.dbo.vender',
             <EntityTypeMapping TypeName="DBTallerMotosModel.venta">
               <MappingFragment StoreEntitySet="venta">
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
                 <ScalarProperty Name="fecha_venta" ColumnName="fecha_venta" />
                 <ScalarProperty Name="codigo_repuesto" ColumnName="codigo_repuesto" />
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="precio_total" ColumnName="precio_total" />
+                <ScalarProperty Name="valor_total" ColumnName="valor_total" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

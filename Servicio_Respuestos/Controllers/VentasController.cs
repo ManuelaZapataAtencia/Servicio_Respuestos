@@ -4,50 +4,40 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using System.Web.Mvc;
 using Servicio_Respuestos.Clases;
 using Servicio_Respuestos.Models;
 
 namespace Servicio_Respuestos.Controllers
 {
     [EnableCors(origins: "http://localhost:53331", headers: "*", methods: "*")]
+    [RoutePrefix("api/Ventas")]
+    
     public class VentasController : ApiController
     {
-        public IQueryable Get()
+        [HttpGet]
+        [Route("LlenarTablaVenta")]
+        public IQueryable LlenarTablaVenta(int CodigoVenta)
         {
             clsVentas _ventas = new clsVentas();
-            return _ventas.ListarTodosConRepuesto();
-        }
-
-        // GET api/<controller>/5
-        public venta Get(int id)
-        {
-            clsVentas _venta = new clsVentas();
-            return _venta.Consultar(id);
+            return _ventas.ListarProductoVender(CodigoVenta);
         }
 
         // POST api/<controller>
-        public string Post([FromBody] venta venta)
+        [HttpPost]
+        [Route("AgregarProducto")]
+        public string AgregarProducto([FromBody] venta venta)
         {
             clsVentas _venta = new clsVentas();
             _venta.venta = venta;
             return _venta.Insertar();
         }
 
-        // PUT api/<controller>/5
-        public string Put([FromBody] venta venta)
+        [HttpDelete]
+        [Route("EliminarVenta")]
+        public string EliminarVenta(int CodigoVenta)
         {
-            clsVentas _venta = new clsVentas();   
-            _venta.venta = venta;
-            return _venta.Actualizar();
-        }
-
-        // DELETE api/<controller>/5
-        public string Delete([FromBody] venta venta)
-        {
-            clsVentas _venta = new clsVentas();   
-            _venta.venta = venta;
-            return _venta.Eliminar();
+            clsVentas facturacion = new clsVentas();
+            return facturacion.Eliminar(CodigoVenta);
         }
     }
 }

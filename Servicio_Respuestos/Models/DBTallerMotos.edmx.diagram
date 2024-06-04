@@ -4,33 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9e6ac082654c4adeb74c4b0d77f78216" Name="Diagram1">
+      <Diagram DiagramId="ed8217d711ed43a7b67e3799f638c3c1" Name="Diagram1">
         <EntityTypeShape EntityType="DBTallerMotosModel.categoria" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBTallerMotosModel.ciudad" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBTallerMotosModel.cliente" Width="1.5" PointX="10" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTallerMotosModel.ciudad" Width="1.5" PointX="10" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTallerMotosModel.cliente" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DBTallerMotosModel.compatibilidad" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBTallerMotosModel.departamento" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBTallerMotosModel.empleado" Width="1.5" PointX="10" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTallerMotosModel.departamento" Width="1.5" PointX="7.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTallerMotosModel.empleado" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DBTallerMotosModel.garantia" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DBTallerMotosModel.marca" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBTallerMotosModel.moto" Width="1.5" PointX="7.75" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBTallerMotosModel.perfil" Width="1.5" PointX="12.25" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBTallerMotosModel.proveedor" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTallerMotosModel.moto" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTallerMotosModel.perfil" Width="1.5" PointX="10" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTallerMotosModel.proveedor" Width="1.5" PointX="12.25" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DBTallerMotosModel.repuesto" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBTallerMotosModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBTallerMotosModel.usuario" Width="1.5" PointX="12.25" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBTallerMotosModel.usuario_perfil" Width="1.5" PointX="14.5" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTallerMotosModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTallerMotosModel.usuario" Width="1.5" PointX="10" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBTallerMotosModel.usuario_perfil" Width="1.5" PointX="12.25" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBTallerMotosModel.venta" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
-        <AssociationConnector Association="DBTallerMotosModel.FK__repuesto__codigo__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="DBTallerMotosModel.FK__repuesto__codigo__0A688BB1" ManuallyRouted="false" />
         <AssociationConnector Association="DBTallerMotosModel.FK__ciudad__codigo_d__2DE6D218" ManuallyRouted="false" />
         <AssociationConnector Association="DBTallerMotosModel.FK__proveedor__codig__4D5F7D71" ManuallyRouted="false" />
         <AssociationConnector Association="DBTallerMotosModel.FK__cliente__id_moto__17F790F9" ManuallyRouted="false" />
-        <AssociationConnector Association="DBTallerMotosModel.FK__compatibi__codig__1F98B2C1" ManuallyRouted="false" />
-        <AssociationConnector Association="DBTallerMotosModel.FK__compatibi__id_ma__208CD6FA" ManuallyRouted="false" />
+        <AssociationConnector Association="DBTallerMotosModel.FK__compatibi__codig__10216507" ManuallyRouted="false" />
+        <AssociationConnector Association="DBTallerMotosModel.FK__compatibi__id_ma__11158940" ManuallyRouted="false" />
         <AssociationConnector Association="DBTallerMotosModel.FK__usuario__cedula___756D6ECB" ManuallyRouted="false" />
-        <AssociationConnector Association="DBTallerMotosModel.FK__garantia__codigo__339FAB6E" ManuallyRouted="false" />
+        <AssociationConnector Association="DBTallerMotosModel.FK__garantia__codigo__2057CCD0" ManuallyRouted="false" />
         <AssociationConnector Association="DBTallerMotosModel.FK__usuario_p__id_pe__7E02B4CC" ManuallyRouted="false" />
-        <AssociationConnector Association="DBTallerMotosModel.FK__venta__codigo_re__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="DBTallerMotosModel.FK__venta__codigo_re__1D7B6025" ManuallyRouted="false" />
         <AssociationConnector Association="DBTallerMotosModel.FK__usuario_p__id_us__7D0E9093" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

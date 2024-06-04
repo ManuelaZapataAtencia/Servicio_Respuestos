@@ -4,9 +4,9 @@
     <Key>
       <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="repuesto" Relationship="Self.FK__repuesto__codigo__02FC7413" FromRole="categoria" ToRole="repuesto" />
+    <NavigationProperty Name="repuesto" Relationship="Self.FK__repuesto__codigo__0A688BB1" FromRole="categoria" ToRole="repuesto" />
   </EntityType>
   <EntityType Name="ciudad">
     <Key>
@@ -34,12 +34,12 @@
     <Key>
       <PropertyRef Name="id_compatibilidad" />
     </Key>
-    <Property Name="id_compatibilidad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="codigo_repuesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_compatibilidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codigo_repuesto" Type="Int32" />
     <Property Name="id_marca" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="cantidad_requerida" Type="Int32" />
-    <NavigationProperty Name="repuesto" Relationship="Self.FK__compatibi__codig__1F98B2C1" FromRole="compatibilidad" ToRole="repuesto" />
-    <NavigationProperty Name="marca" Relationship="Self.FK__compatibi__id_ma__208CD6FA" FromRole="compatibilidad" ToRole="marca" />
+    <NavigationProperty Name="repuesto" Relationship="Self.FK__compatibi__codig__10216507" FromRole="compatibilidad" ToRole="repuesto" />
+    <NavigationProperty Name="marca" Relationship="Self.FK__compatibi__id_ma__11158940" FromRole="compatibilidad" ToRole="marca" />
   </EntityType>
   <EntityType Name="departamento">
     <Key>
@@ -57,17 +57,16 @@
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="edad" Type="Int32" />
     <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="codigo_tipo" Type="Int32" />
     <NavigationProperty Name="usuario" Relationship="Self.FK__usuario__cedula___756D6ECB" FromRole="empleado" ToRole="usuario" />
   </EntityType>
   <EntityType Name="garantia">
     <Key>
-      <PropertyRef Name="codigo" />
+      <PropertyRef Name="codigo_garantia" />
     </Key>
-    <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codigo_garantia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="codigo_venta" Type="Int32" />
     <Property Name="duracion" Type="Int32" />
-    <NavigationProperty Name="venta" Relationship="Self.FK__garantia__codigo__339FAB6E" FromRole="garantia" ToRole="venta" />
+    <NavigationProperty Name="venta" Relationship="Self.FK__garantia__codigo__2057CCD0" FromRole="garantia" ToRole="venta" />
   </EntityType>
   <EntityType Name="marca">
     <Key>
@@ -75,7 +74,7 @@
     </Key>
     <Property Name="id_marca" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="compatibilidad" Relationship="Self.FK__compatibi__id_ma__208CD6FA" FromRole="marca" ToRole="compatibilidad" />
+    <NavigationProperty Name="compatibilidad" Relationship="Self.FK__compatibi__id_ma__11158940" FromRole="marca" ToRole="compatibilidad" />
   </EntityType>
   <EntityType Name="moto">
     <Key>
@@ -111,14 +110,14 @@
     <Key>
       <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="codigo" Type="Int32" Nullable="false" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="codigo_categoria" Type="Int32" />
     <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="precio" Type="Decimal" Precision="19" Scale="4" />
-    <Property Name="codigo_categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="categoria" Relationship="Self.FK__repuesto__codigo__02FC7413" FromRole="repuesto" ToRole="categoria" />
-    <NavigationProperty Name="compatibilidad" Relationship="Self.FK__compatibi__codig__1F98B2C1" FromRole="repuesto" ToRole="compatibilidad" />
-    <NavigationProperty Name="venta" Relationship="Self.FK__venta__codigo_re__628FA481" FromRole="repuesto" ToRole="venta" />
+    <Property Name="valor_unitario" Type="Int32" />
+    <NavigationProperty Name="categoria" Relationship="Self.FK__repuesto__codigo__0A688BB1" FromRole="repuesto" ToRole="categoria" />
+    <NavigationProperty Name="compatibilidad" Relationship="Self.FK__compatibi__codig__10216507" FromRole="repuesto" ToRole="compatibilidad" />
+    <NavigationProperty Name="venta" Relationship="Self.FK__venta__codigo_re__1D7B6025" FromRole="repuesto" ToRole="venta" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -157,15 +156,16 @@
     <Key>
       <PropertyRef Name="codigo" />
     </Key>
-    <Property Name="codigo" Type="Int32" Nullable="false" />
+    <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="fecha_venta" Type="DateTime" Precision="0" />
-    <Property Name="codigo_repuesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="codigo_repuesto" Type="Int32" />
     <Property Name="cantidad" Type="Int32" />
-    <Property Name="precio_total" Type="Decimal" Precision="19" Scale="4" />
-    <NavigationProperty Name="garantia" Relationship="Self.FK__garantia__codigo__339FAB6E" FromRole="venta" ToRole="garantia" />
-    <NavigationProperty Name="repuesto" Relationship="Self.FK__venta__codigo_re__628FA481" FromRole="venta" ToRole="repuesto" />
+    <Property Name="valor_total" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="garantia" Relationship="Self.FK__garantia__codigo__2057CCD0" FromRole="venta" ToRole="garantia" />
+    <NavigationProperty Name="repuesto" Relationship="Self.FK__venta__codigo_re__1D7B6025" FromRole="venta" ToRole="repuesto" />
   </EntityType>
-  <Association Name="FK__repuesto__codigo__02FC7413">
+  <Association Name="FK__repuesto__codigo__0A688BB1">
     <End Role="categoria" Type="Self.categoria" Multiplicity="0..1" />
     <End Role="repuesto" Type="Self.repuesto" Multiplicity="*" />
     <ReferentialConstraint>
@@ -213,7 +213,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__compatibi__codig__1F98B2C1">
+  <Association Name="FK__compatibi__codig__10216507">
     <End Role="repuesto" Type="Self.repuesto" Multiplicity="0..1" />
     <End Role="compatibilidad" Type="Self.compatibilidad" Multiplicity="*" />
     <ReferentialConstraint>
@@ -225,7 +225,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__compatibi__id_ma__208CD6FA">
+  <Association Name="FK__compatibi__id_ma__11158940">
     <End Role="marca" Type="Self.marca" Multiplicity="0..1" />
     <End Role="compatibilidad" Type="Self.compatibilidad" Multiplicity="*" />
     <ReferentialConstraint>
@@ -249,7 +249,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__garantia__codigo__339FAB6E">
+  <Association Name="FK__garantia__codigo__2057CCD0">
     <End Role="venta" Type="Self.venta" Multiplicity="0..1" />
     <End Role="garantia" Type="Self.garantia" Multiplicity="*" />
     <ReferentialConstraint>
@@ -273,7 +273,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__venta__codigo_re__628FA481">
+  <Association Name="FK__venta__codigo_re__1D7B6025">
     <End Role="repuesto" Type="Self.repuesto" Multiplicity="0..1" />
     <End Role="venta" Type="Self.venta" Multiplicity="*" />
     <ReferentialConstraint>
@@ -314,7 +314,7 @@
     <EntitySet Name="usuario" EntityType="Self.usuario" />
     <EntitySet Name="usuario_perfil" EntityType="Self.usuario_perfil" />
     <EntitySet Name="venta" EntityType="Self.venta" />
-    <AssociationSet Name="FK__repuesto__codigo__02FC7413" Association="Self.FK__repuesto__codigo__02FC7413">
+    <AssociationSet Name="FK__repuesto__codigo__0A688BB1" Association="Self.FK__repuesto__codigo__0A688BB1">
       <End Role="categoria" EntitySet="categoria" />
       <End Role="repuesto" EntitySet="repuesto" />
     </AssociationSet>
@@ -330,11 +330,11 @@
       <End Role="moto" EntitySet="moto" />
       <End Role="cliente" EntitySet="cliente" />
     </AssociationSet>
-    <AssociationSet Name="FK__compatibi__codig__1F98B2C1" Association="Self.FK__compatibi__codig__1F98B2C1">
+    <AssociationSet Name="FK__compatibi__codig__10216507" Association="Self.FK__compatibi__codig__10216507">
       <End Role="repuesto" EntitySet="repuesto" />
       <End Role="compatibilidad" EntitySet="compatibilidad" />
     </AssociationSet>
-    <AssociationSet Name="FK__compatibi__id_ma__208CD6FA" Association="Self.FK__compatibi__id_ma__208CD6FA">
+    <AssociationSet Name="FK__compatibi__id_ma__11158940" Association="Self.FK__compatibi__id_ma__11158940">
       <End Role="marca" EntitySet="marca" />
       <End Role="compatibilidad" EntitySet="compatibilidad" />
     </AssociationSet>
@@ -342,7 +342,7 @@
       <End Role="empleado" EntitySet="empleado" />
       <End Role="usuario" EntitySet="usuario" />
     </AssociationSet>
-    <AssociationSet Name="FK__garantia__codigo__339FAB6E" Association="Self.FK__garantia__codigo__339FAB6E">
+    <AssociationSet Name="FK__garantia__codigo__2057CCD0" Association="Self.FK__garantia__codigo__2057CCD0">
       <End Role="venta" EntitySet="venta" />
       <End Role="garantia" EntitySet="garantia" />
     </AssociationSet>
@@ -350,7 +350,7 @@
       <End Role="perfil" EntitySet="perfil" />
       <End Role="usuario_perfil" EntitySet="usuario_perfil" />
     </AssociationSet>
-    <AssociationSet Name="FK__venta__codigo_re__628FA481" Association="Self.FK__venta__codigo_re__628FA481">
+    <AssociationSet Name="FK__venta__codigo_re__1D7B6025" Association="Self.FK__venta__codigo_re__1D7B6025">
       <End Role="repuesto" EntitySet="repuesto" />
       <End Role="venta" EntitySet="venta" />
     </AssociationSet>

@@ -9,6 +9,7 @@
 
 namespace Servicio_Respuestos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -19,7 +20,9 @@ namespace Servicio_Respuestos.Models
         public Nullable<int> id_perfil { get; set; }
         public Nullable<bool> activo { get; set; }
     
+        [JsonIgnore]
         public virtual perfil perfil { get; set; }
+        [JsonIgnore]
         public virtual usuario usuario { get; set; }
     }
 }

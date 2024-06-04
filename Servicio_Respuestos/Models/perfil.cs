@@ -9,6 +9,7 @@
 
 namespace Servicio_Respuestos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -23,6 +24,7 @@ namespace Servicio_Respuestos.Models
         public string Nombre { get; set; }
         public string pagina_navegar { get; set; }
     
+        [JsonIgnore]
         public virtual ICollection<usuario_perfil> usuario_perfil { get; set; }
     }
 }

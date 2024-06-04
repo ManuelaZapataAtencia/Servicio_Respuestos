@@ -9,6 +9,7 @@
 
 namespace Servicio_Respuestos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -25,7 +26,9 @@ namespace Servicio_Respuestos.Models
         public string clave { get; set; }
         public string salt { get; set; }
     
+        [JsonIgnore]
         public virtual empleado empleado { get; set; }
+        [JsonIgnore]
         public virtual ICollection<usuario_perfil> usuario_perfil { get; set; }
     }
 }
