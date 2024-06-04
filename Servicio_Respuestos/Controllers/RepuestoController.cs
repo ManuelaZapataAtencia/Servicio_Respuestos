@@ -17,10 +17,10 @@ namespace Servicio_Respuestos.Controllers
 
         [HttpGet]
         [Route("LlenarCombo")]
-        public IQueryable LlenarCombo()
+        public IQueryable LlenarCombo(int CodigoCategoria)
         {
             clsRepuesto _producto = new clsRepuesto();
-            return _producto.LlenarCombo();
+            return _producto.LlenarCombo(CodigoCategoria);
         }
         public IQueryable Get()
         {

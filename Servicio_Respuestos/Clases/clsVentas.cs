@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using Servicio_Respuestos.Clases;
 using Servicio_Respuestos.Models;
+using System.Data.Objects.SqlClient;
 
 namespace Servicio_Respuestos.Clases
 {
@@ -20,15 +21,10 @@ namespace Servicio_Respuestos.Clases
                 .Where(r => r.codigo.Equals(venta.codigo_repuesto))
                 .Select(r => r.valor_unitario)
                 .FirstOrDefault();
-            if (precioProducto != null)
+            if (precioProducto != 0)
             {
                 venta.valor_total = (decimal?)(venta.cantidad * Convert.ToDouble(precioProducto));
             }
-        }
-
-        private int CalcularNumeroFactura()
-        {
-            return dbTaller.venta.Select(f => f.codigo).DefaultIfEmpty(0).Count() + 1;
         }
 
         //Método insertar
@@ -63,21 +59,19 @@ namespace Servicio_Respuestos.Clases
             return dbTaller.venta.FirstOrDefault(e => e.codigo == id_venta);
         }
 
-        public IQueryable ListarProductoVender(int CodigoVenta)
+        public IQueryable LlenarTablaVenta()
         {
-            return from c in dbTaller.Set<categoria>() 
-                   join r in dbTaller.Set<repuesto>()
-                   on c.codigo equals r.codigo
+            return from r in dbTaller.Set<repuesto>()
                    join v in dbTaller.Set<venta>()
                    on r.codigo equals v.codigo_repuesto
-                   where v.codigo == CodigoVenta
                    select new
                    {
-                       Eliminar = "<button type=\"button\" id=\"btnEliminar\" class=\"btn-block btn-sm btn-danger\" " +
-                                "onclick=\"Eliminar(" + v.codigo + ")\">ELIMINAR</button>",
+                       Eliminar = "<button type=\"button\" id=\"btnEliminar\" " +
+                       "class=\"btn-block btn-sm btn-danger\" " +
+                       "onclick=\"Eliminar(" + SqlFunctions.StringConvert((double)v.codigo).Trim() + "" +
+                       ")\">ELIMINAR</button>",
                        Codigo = v.codigo,
                        Fecha = v.fecha_venta,
-                       Categoria = c.nombre,
                        Repuesto = r.nombre,
                        Precio = r.valor_unitario,
                        Cantidad = v.cantidad,

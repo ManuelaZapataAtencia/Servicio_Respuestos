@@ -80,6 +80,7 @@ namespace Servicio_Respuestos.Clases
                        Nit = p.nit,
                        Nombre = p.nombre,
                        Telefono = p.telefono,
+                       Correo = p.correo,
                        Ciudad = c.nombre,
                    };
         }

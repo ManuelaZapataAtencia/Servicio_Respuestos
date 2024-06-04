@@ -16,10 +16,10 @@ namespace Servicio_Respuestos.Controllers
     {
         [HttpGet]
         [Route("LlenarTablaVenta")]
-        public IQueryable LlenarTablaVenta(int CodigoVenta)
+        public IQueryable LlenarTablaVenta()
         {
             clsVentas _ventas = new clsVentas();
-            return _ventas.ListarProductoVender(CodigoVenta);
+            return _ventas.LlenarTablaVenta();
         }
 
         // POST api/<controller>
