@@ -22,6 +22,14 @@ namespace Servicio_Respuestos.Controllers
             return _ventas.LlenarTablaVenta();
         }
 
+        [HttpGet]
+        [Route("CalcularTotal")]
+        public string CalcularTotal()
+        {
+            clsVentas _ventas = new clsVentas();
+            return _ventas.CalcularTotal();
+        }
+
         // POST api/<controller>
         [HttpPost]
         [Route("AgregarProducto")]

@@ -15,16 +15,10 @@ namespace Servicio_Respuestos.Clases
         private DBTallerMotosEntities dbTaller = new DBTallerMotosEntities();
         public venta venta { get; set; }
 
-        private void CalcularPrecioTotal()
+        public string CalcularTotal()
         {
-            var precioProducto = dbTaller.repuesto
-                .Where(r => r.codigo.Equals(venta.codigo_repuesto))
-                .Select(r => r.valor_unitario)
-                .FirstOrDefault();
-            if (precioProducto != 0)
-            {
-                venta.valor_total = (decimal?)(venta.cantidad * Convert.ToDouble(precioProducto));
-            }
+            double total = (double)dbTaller.venta.Select(v => v.valor_total).Sum();
+            return total.ToString();
         }
 
         //Método insertar
